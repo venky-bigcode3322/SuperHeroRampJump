@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: 901d6519c82de164b9009682d05fe379
+timeCreated: 1454032595
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Back_Wheel1
+    100002: Back_Wheel1 1
+    100004: Back_Wheel1 2
+    100006: Back_Wheel1 3
+    100008: Bike_01
+    100010: Bike_02
+    100012: Bike_03
+    100014: //RootNode
+    100016: Bike_04
+    100018: Body
+    100020: Body 1
+    100022: Body 2
+    100024: Body 3
+    100026: Front_Wheel
+    100028: Front_Wheel 1
+    100030: Front_Wheel 2
+    100032: Front_Wheel 3
+    100034: Handle
+    100036: Handle 1
+    100038: Handle 2
+    100040: Handle 3
+    100042: pPlane1
+    100044: Steer_Handle
+    100046: Steer_Handle 1
+    100048: Steer_Handle 2
+    100050: Steer_Handle 3
+    100052: Bike_04_01
+    100054: Bike_04_02
+    100056: Bike_04_03
+    100058: Bike_04_04
+    400000: Back_Wheel1
+    400002: Back_Wheel1 1
+    400004: Back_Wheel1 2
+    400006: Back_Wheel1 3
+    400008: Bike_01
+    400010: Bike_02
+    400012: Bike_03
+    400014: Bike_04
+    400016: //RootNode
+    400018: Body
+    400020: Body 1
+    400022: Body 2
+    400024: Body 3
+    400026: Front_Wheel
+    400028: Front_Wheel 1
+    400030: Front_Wheel 2
+    400032: Front_Wheel 3
+    400034: Handle
+    400036: Handle 1
+    400038: Handle 2
+    400040: Handle 3
+    400042: pPlane1
+    400044: Steer_Handle
+    400046: Steer_Handle 1
+    400048: Steer_Handle 2
+    400050: Steer_Handle 3
+    400052: Bike_04_01
+    400054: Bike_04_02
+    400056: Bike_04_03
+    400058: Bike_04_04
+    2300000: Back_Wheel1
+    2300002: Back_Wheel1 1
+    2300004: Back_Wheel1 2
+    2300006: Back_Wheel1 3
+    2300008: Body
+    2300010: Body 1
+    2300012: Body 2
+    2300014: Body 3
+    2300016: Front_Wheel
+    2300018: Front_Wheel 1
+    2300020: Front_Wheel 2
+    2300022: Front_Wheel 3
+    2300024: Handle
+    2300026: Handle 1
+    2300028: Handle 2
+    2300030: Handle 3
+    2300032: pPlane1
+    3300000: Back_Wheel1
+    3300002: Back_Wheel1 1
+    3300004: Back_Wheel1 2
+    3300006: Back_Wheel1 3
+    3300008: Body
+    3300010: Body 1
+    3300012: Body 2
+    3300014: Body 3
+    3300016: Front_Wheel
+    3300018: Front_Wheel 1
+    3300020: Front_Wheel 2
+    3300022: Front_Wheel 3
+    3300024: Handle
+    3300026: Handle 1
+    3300028: Handle 2
+    3300030: Handle 3
+    3300032: pPlane1
+    4300000: Back_Wheel1
+    4300002: Body
+    4300004: Front_Wheel
+    4300006: Handle
+    4300008: pPlane1
+    4300010: Back_Wheel1
+    4300012: Body
+    4300014: Front_Wheel
+    4300016: Handle
+    4300018: Back_Wheel1
+    4300020: Body
+    4300022: Front_Wheel
+    4300024: Handle
+    4300026: Back_Wheel1
+    4300028: Body
+    4300030: Front_Wheel
+    4300032: Handle
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,149 @@
+fileFormatVersion: 2
+guid: faf8995f4b54d464fa16e5f9b42df3e6
+timeCreated: 1454032596
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BackWheel
+    100002: BackWheel 1
+    100004: BackWheel 2
+    100006: Bike_01
+    100008: Bike_02
+    100010: //RootNode
+    100012: Bike_03
+    100014: Body
+    100016: Body 1
+    100018: Body 2
+    100020: FrontWheel
+    100022: FrontWheel 1
+    100024: FrontWheel 2
+    100026: Handle
+    100028: Handle 1
+    100030: Handle 2
+    100032: pPlane1
+    100034: Bike_03_01
+    100036: Bike_03_02
+    100038: Bike_03_03
+    400000: BackWheel
+    400002: BackWheel 1
+    400004: BackWheel 2
+    400006: Bike_01
+    400008: Bike_02
+    400010: //RootNode
+    400012: Bike_03
+    400014: Body
+    400016: Body 1
+    400018: Body 2
+    400020: FrontWheel
+    400022: FrontWheel 1
+    400024: FrontWheel 2
+    400026: Handle
+    400028: Handle 1
+    400030: Handle 2
+    400032: pPlane1
+    400034: Bike_03_01
+    400036: Bike_03_02
+    400038: Bike_03_03
+    2300000: BackWheel
+    2300002: BackWheel 1
+    2300004: BackWheel 2
+    2300006: Body
+    2300008: Body 1
+    2300010: Body 2
+    2300012: FrontWheel
+    2300014: FrontWheel 1
+    2300016: FrontWheel 2
+    2300018: Handle
+    2300020: Handle 1
+    2300022: Handle 2
+    2300024: pPlane1
+    3300000: BackWheel
+    3300002: BackWheel 1
+    3300004: BackWheel 2
+    3300006: Body
+    3300008: Body 1
+    3300010: Body 2
+    3300012: FrontWheel
+    3300014: FrontWheel 1
+    3300016: FrontWheel 2
+    3300018: Handle
+    3300020: Handle 1
+    3300022: Handle 2
+    3300024: pPlane1
+    4300000: BackWheel
+    4300002: Body
+    4300004: FrontWheel
+    4300006: Handle
+    4300008: pPlane1
+    4300010: BackWheel
+    4300012: Body
+    4300014: FrontWheel
+    4300016: Handle
+    4300018: BackWheel
+    4300020: Body
+    4300022: FrontWheel
+    4300024: Handle
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
