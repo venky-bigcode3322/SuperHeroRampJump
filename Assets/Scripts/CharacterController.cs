@@ -11,6 +11,8 @@ public class CharacterController : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
+    [SerializeField] Transform Hips;
+
     private void Awake()
     {
         foreach (var item in GetComponentsInChildren<Rigidbody>())
@@ -45,12 +47,19 @@ public class CharacterController : MonoBehaviour
 
     bool applyforce = false;
 
+    private Vector3 currentPosition;
+
     private void FixedUpdate()
     {
         if (applyforce)
         {
             //_rigidbody.AddForce(transform.right * 10,ForceMode.Impulse);
         }
+        currentPosition = Hips.localPosition;
+        currentPosition.x = 0;
+        Hips.localPosition = currentPosition;
+
+
     }
 
     public void ActivateRagdoll() 
