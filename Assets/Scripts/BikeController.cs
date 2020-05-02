@@ -1,9 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BikeController : MonoBehaviour
 {
+
+    public static BikeController Instance
+    {
+        get;private set;
+    }
+
+    public enum BikeControlStates
+    {
+        InitState,
+        StartMovingState,
+        CanTapForBoostState,
+        ReleaseCharacterFromBike
+    }
+
     private Rigidbody2D body;
 
     [SerializeField] Rigidbody2D FrontWheel;
@@ -19,13 +34,42 @@ public class BikeController : MonoBehaviour
 
     private Vector2 BikeDirection;
 
-    private float _vertical = 0;
+    private float MoveForce = 0;
+
+    [SerializeField] Text SpeedText;
+
+    public BikeControlStates CurrentBikeState = BikeControlStates.InitState;
+
+    [SerializeField] Transform CharacterPose;
+
+    public CharacterController CharacterController;
 
     private void Awake()
     {
+        Instance = this;
+
         wheelRadius = FrontWheel.GetComponent<CircleCollider2D>().radius;
 
         body = this.GetComponent<Rigidbody2D>();
+
+        CharacterController.transform.localPosition = CharacterPose.localPosition;
+        CharacterController.transform.localRotation = CharacterPose.localRotation;
+    }
+
+    private void Start()
+    {
+        CurrentBikeState = BikeControlStates.InitState;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(CurrentBikeState == BikeControlStates.InitState)
+            {
+                CurrentBikeState = BikeControlStates.StartMovingState;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -38,31 +82,32 @@ public class BikeController : MonoBehaviour
 
         BikeDirection = FrontWheel.position - BackWheel.position;
         BikeDirection.Normalize();
-    }
-    private int movingforce = 1250;
-    private void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            _vertical += 0.1f;
-            if (_vertical > 1)
-            {
-                _vertical = 1;
-            }
 
-            ApplyTorqueBike(movingforce);
-        }
-        else
+        if(CurrentBikeState == BikeControlStates.StartMovingState)
         {
-            _vertical = 0;
+            MoveForce += 50f;
+           
+            ApplyTorqueBike();
         }
+
+        SpeedText.text = "BikeSpeed: " + body.velocity.magnitude;
     }
 
-    public void ApplyTorqueBike(int force)
+    public void ApplyTorqueBike()
     {
-        if (body.velocity.x <= 18f && body.velocity.x >= -15)
+        body.AddRelativeForce( MoveForce * BikeDirection * Time.deltaTime);
+    }
+
+    public void ReleaseCharacter()
+    {
+        if (CameraFollow.Instance) CameraFollow.Instance.Target = CharacterController.transform.GetChild(2);
+        CharacterController.transform.parent = null;
+        CharacterController.ReleaseCharacter();
+        if(CurrentBikeState == BikeControlStates.StartMovingState)
         {
-            body.AddForce(_vertical * BikeDirection * force);
+            CurrentBikeState = BikeControlStates.ReleaseCharacterFromBike;
         }
+
+        body.velocity = Vector2.zero;
     }
 }

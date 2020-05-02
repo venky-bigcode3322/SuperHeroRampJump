@@ -2,6 +2,11 @@
 
 public class CameraFollow : MonoBehaviour
 {
+    public static CameraFollow Instance
+    {
+        get;private set;
+    }
+
     // camera will follow this object
     public Transform Target;
     //camera transform
@@ -14,8 +19,9 @@ public class CameraFollow : MonoBehaviour
     // This value will change at the runtime depending on target movement. Initialize with zero vector.
     private Vector3 velocity = Vector3.zero;
 
-    private void Start()
+    private void Awake()
     {
+        Instance = this;
        // Offset = camTransform.position - Target.position;
     }
 
@@ -23,7 +29,7 @@ public class CameraFollow : MonoBehaviour
     {
         // update position
         Vector3 targetPosition = Target.position + Offset;
-        camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
+        camTransform.position = Vector3.Lerp(transform.position, targetPosition,SmoothTime * Time.deltaTime);
 
         // update rotation
         transform.LookAt(Target);
