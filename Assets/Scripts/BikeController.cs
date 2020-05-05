@@ -108,6 +108,7 @@ public class BikeController : MonoBehaviour
             CurrentBikeState = BikeControlStates.ReleaseCharacterFromBike;
         }
 
-        body.velocity = Vector2.zero;
+        body.velocity = body.velocity / 4;
+        body.mass = 10000000;
     }
 }

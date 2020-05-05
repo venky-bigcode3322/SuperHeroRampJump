@@ -43,6 +43,8 @@ public class CharacterController : MonoBehaviour
         _rigidbody.useGravity = true;
         applyforce = true;
         ActivateRagdoll();
+
+        transform.rotation = Quaternion.LookRotation(Vector3.down - transform.up);
     }
 
     bool applyforce = false;
