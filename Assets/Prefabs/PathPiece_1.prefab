@@ -1,33 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &1399517073436444829
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399517074476342688}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
---- !u!64 &1399517074305042199
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399517074627551694}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
 --- !u!1 &1399517074339222437
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,20 +105,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd1d8fae587ce944b3a24f5b9f75e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &1399517074728374206
+--- !u!64 &1399517073436444829
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399517075345680767}
+  m_GameObject: {fileID: 1399517074476342688}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
+--- !u!64 &1399517074305042199
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399517074627551694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
 --- !u!1 &1399517075131262065
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +167,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1399517074728374206
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399517075345680767}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
 --- !u!1001 &1399517074476243712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,10 +191,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
       propertyPath: m_Name
       value: Beach_04
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
       propertyPath: m_LocalPosition.x
@@ -241,16 +237,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2218e91e550827c49b9856d80c1d4816, type: 3}
@@ -276,10 +264,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
       propertyPath: m_Name
       value: Beach_02
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -325,18 +309,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f35cba34373ee469499e06d3528cf7, type: 3}
 --- !u!1 &1399517074627551694 stripped
@@ -361,10 +333,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
       propertyPath: m_Name
       value: Beach_05
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -409,18 +377,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341e6c20140bd454587ffc761ad99f4c, type: 3}
