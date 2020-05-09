@@ -41,11 +41,23 @@ public class CharacterController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(Vector3.down - transform.up);
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = true;
-        applyforce = true;
         ActivateRagdoll();
 
         transform.rotation = Quaternion.LookRotation(Vector3.down - transform.up);
     }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            applyforce = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            applyforce = false;
+        }
+    }
+
 
     bool applyforce = false;
 
@@ -55,13 +67,14 @@ public class CharacterController : MonoBehaviour
     {
         if (applyforce)
         {
-            //_rigidbody.AddForce(transform.right * 10,ForceMode.Impulse);
+            foreach (var item in AllBodyRigidbody)
+            {
+                item.AddForce(((Vector3.right - Vector3.down) / 2) * item.mass, ForceMode.Impulse);
+            }
         }
         currentPosition = Hips.localPosition;
         currentPosition.x = 0;
         Hips.localPosition = currentPosition;
-
-
     }
 
     public void ActivateRagdoll() 

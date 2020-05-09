@@ -70,7 +70,18 @@ public class BikeController : MonoBehaviour
                 CurrentBikeState = BikeControlStates.StartMovingState;
             }
         }
+
+        if (Input.GetMouseButton(0))
+        {
+            applyforce = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            applyforce = false;
+        }
     }
+
+    bool applyforce = false;
 
     private void FixedUpdate()
     {
@@ -91,6 +102,16 @@ public class BikeController : MonoBehaviour
         }
 
         SpeedText.text = "BikeSpeed: " + body.velocity.magnitude;
+
+        if (applyforce && CurrentBikeState == BikeControlStates.CanTapForBoostState)
+        {
+            Vector3 dir = (Vector3.forward - Vector3.down) / 2;
+            dir = dir.normalized;
+           body.AddForce(dir * body.mass, ForceMode2D.Impulse);
+
+            var q = Quaternion.LookRotation(transform.forward);
+            body.MoveRotation(Quaternion.RotateTowards(transform.rotation, q, 5 * Time.deltaTime));
+        }
     }
 
     public void ApplyTorqueBike()
@@ -100,6 +121,9 @@ public class BikeController : MonoBehaviour
 
     public void ReleaseCharacter()
     {
+        CurrentBikeState = BikeControlStates.CanTapForBoostState;
+        return;
+
         if (CameraFollow.Instance) CameraFollow.Instance.Target = CharacterController.transform.GetChild(2);
         CharacterController.transform.parent = null;
         CharacterController.ReleaseCharacter();
@@ -111,4 +135,6 @@ public class BikeController : MonoBehaviour
         body.velocity = body.velocity / 4;
         body.mass = 10000000;
     }
+
+
 }
