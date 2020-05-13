@@ -33,10 +33,10 @@ public class PathLoopManager : MonoBehaviour
         GameObject obj;
         for (int i = 0; i < PathPrefabs.Length; i++)
         {
-            obj = Instantiate(PathPrefabs[3]) as GameObject;
+            obj = Instantiate(PathPrefabs[i]) as GameObject;
             obj.name = i.ToString();
             obj.SetActive(true);
-            tempPosition.x = (i +1)* 720;
+            tempPosition.x = (i + 1)* 720;
             obj.transform.position = tempPosition;
             obj.transform.rotation = Quaternion.identity;
             AvailablePaths.Add(obj.transform);
@@ -44,8 +44,16 @@ public class PathLoopManager : MonoBehaviour
         }
     }
 
+    bool leaveFirstPath = false;
+
     public void AssignNewPath()
     {
+        if(!leaveFirstPath)
+        {
+            leaveFirstPath = true;
+            return;
+        }
+
         GameObject obj = AvailablePaths[0].gameObject;
         obj.SetActive(false);
         AvailablePaths.Remove(AvailablePaths[0].transform);

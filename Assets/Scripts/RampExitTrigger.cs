@@ -10,7 +10,7 @@ public class RampExitTrigger : MonoBehaviour
         if (!isTriggered)
         {
             isTriggered = true;
-            if (BikeController.Instance) BikeController.Instance.ReleaseCharacter();
+            if (BikeController.Instance) BikeController.Instance.ActivateFuel();
         }
     }
 }

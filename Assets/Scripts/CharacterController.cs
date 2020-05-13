@@ -32,6 +32,9 @@ public class CharacterController : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _animator.SetTrigger("DrivePose");
+
+        Hips.transform.GetChild(2).GetComponent<Collider>().enabled = true;
+        Hips.transform.GetChild(2).tag = "Player";
     }
 
     public void ReleaseCharacter()

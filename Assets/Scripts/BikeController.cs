@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BikeController : MonoBehaviour
 {
-
     public static BikeController Instance
     {
         get;private set;
@@ -61,6 +60,8 @@ public class BikeController : MonoBehaviour
         CurrentBikeState = BikeControlStates.InitState;
     }
 
+    private bool isCharacterReleased = false;
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -71,17 +72,30 @@ public class BikeController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0))
+        if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
         {
-            applyforce = true;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            applyforce = false;
+            if (Input.GetMouseButton(0) && GlobalVariables.FuelPercentage > 0)
+            {
+                applyforce = true;
+                GlobalVariables.FuelPercentage -= Time.deltaTime * 20;
+                GameManager.Instance.CheckFuelHUD();
+
+                if (!isCharacterReleased && GlobalVariables.FuelPercentage <= 0)
+                {
+                    isCharacterReleased = true;
+                    ReleaseCharacter();
+                }
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                applyforce = false;
+            }
         }
     }
 
     bool applyforce = false;
+
+    private Vector3 currentPosition;
 
     private void FixedUpdate()
     {
@@ -91,50 +105,76 @@ public class BikeController : MonoBehaviour
         rayHit_front = Physics2D.Raycast(frontWheelStartPoint, -transform.up, wheelRadius + 0.01f);
         rayHit_back = Physics2D.Raycast(backWheelStartPoint, -transform.up, wheelRadius + 0.01f);
 
-        BikeDirection = FrontWheel.position - BackWheel.position;
-        BikeDirection.Normalize();
-
         if(CurrentBikeState == BikeControlStates.StartMovingState)
         {
-            MoveForce += 50f;
+            BikeDirection = FrontWheel.position - BackWheel.position;
+            BikeDirection.Normalize();
+
+            MoveForce += 100;
            
             ApplyTorqueBike();
         }
 
-        SpeedText.text = "BikeSpeed: " + body.velocity.magnitude;
-
-        if (applyforce && CurrentBikeState == BikeControlStates.CanTapForBoostState)
+        if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
         {
-            Vector3 dir = (Vector3.forward - Vector3.down) / 2;
-            dir = dir.normalized;
-           body.AddForce(dir * body.mass, ForceMode2D.Impulse);
+            if (applyforce)
+            {
+                float speed = body.velocity.magnitude;
+                float angularSpeed = body.angularVelocity;
 
-            var q = Quaternion.LookRotation(transform.forward);
-            body.MoveRotation(Quaternion.RotateTowards(transform.rotation, q, 5 * Time.deltaTime));
+                Vector2 dir;
+                //if (transform.position.y >= 50)
+                //    dir = Vector2.right;
+                //else
+                    dir = Vector2.up + Vector2.right;
+
+                dir.Normalize();
+                body.AddForce(transform.right * GlobalVariables.FuelPercentage, ForceMode2D.Impulse);
+
+                body.angularVelocity = 0;
+                //body.gravityScale = 0.5f;
+
+                //var q = Quaternion.LookRotation(dir);//(Vector2.up + Vector2.left);
+                //body.MoveRotation(Quaternion.RotateTowards(transform.rotation,  q, 5 * Time.deltaTime));
+            }
         }
+        //currentPosition = transform.position;
+        //currentPosition.y = Mathf.Clamp(currentPosition.y,0,100);
+        //transform.position = currentPosition;
     }
 
     public void ApplyTorqueBike()
     {
+        Debug.Log("applying torque");
         body.AddRelativeForce( MoveForce * BikeDirection * Time.deltaTime);
+    }
+
+    public void ActivateFuel()
+    {
+        CurrentBikeState = BikeControlStates.CanTapForBoostState;
+        FrontWheel.simulated = false;
+        BackWheel.simulated = false;
+        
     }
 
     public void ReleaseCharacter()
     {
-        CurrentBikeState = BikeControlStates.CanTapForBoostState;
-        return;
-
-        if (CameraFollow.Instance) CameraFollow.Instance.Target = CharacterController.transform.GetChild(2);
+        if (CameraManager.Instance) CameraManager.Instance.target = CharacterController.transform.GetChild(2);
         CharacterController.transform.parent = null;
         CharacterController.ReleaseCharacter();
-        if(CurrentBikeState == BikeControlStates.StartMovingState)
+        if (CurrentBikeState == BikeControlStates.StartMovingState)
         {
             CurrentBikeState = BikeControlStates.ReleaseCharacterFromBike;
         }
 
-        body.velocity = body.velocity / 4;
-        body.mass = 10000000;
+        //body.velocity = body.velocity / 4;
+        //body.mass = 10000000;
     }
 
-
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector2 direction = transform.TransformDirection(Vector2.up + Vector2.left) * 5;
+        Gizmos.DrawRay(transform.position, direction);
+    }
 }
