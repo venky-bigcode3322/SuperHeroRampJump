@@ -90,6 +90,7 @@ public class BikeController : MonoBehaviour
                     ReleaseCharacter();
                 }
             }
+
             if (Input.GetMouseButtonUp(0))
             {
                 applyforce = false;
@@ -194,7 +195,7 @@ public class BikeController : MonoBehaviour
         CameraManager.Instance.offset = Vector3.zero;
      
         CharacterController.ReleaseCharacter(body.velocity.magnitude / 2);
-        if (CurrentBikeState == BikeControlStates.StartMovingState)
+        if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
         {
             CurrentBikeState = BikeControlStates.ReleaseCharacterFromBike;
         }

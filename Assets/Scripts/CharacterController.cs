@@ -39,7 +39,7 @@ public class CharacterController : MonoBehaviour
 
     public void ReleaseCharacter(float val)
     {
-        _animator.SetTrigger("TPose");
+        _animator.SetTrigger("Flying");
 
         transform.rotation = Quaternion.LookRotation(Vector3.down - transform.up);
         _rigidbody.isKinematic = false;
@@ -55,40 +55,33 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //if (Input.GetMouseButton(0))
-        //{
-        //    applyforce = true;
-        //}
-        //if (Input.GetMouseButtonUp(0))
-        //{
-        //    applyforce = false;
-        //}
-    }
-
-
-    bool applyforce = false;
-
     private Vector3 currentPosition;
 
     private void FixedUpdate()
     {
-        if (applyforce)
-        {
-            foreach (var item in AllBodyRigidbody)
-            {
-                item.AddForce(((Vector3.right - Vector3.down) / 2) * item.mass, ForceMode.Impulse);
-            }
-        }
+        //if (applyforce)
+        //{
+        //    foreach (var item in AllBodyRigidbody)
+        //    {
+        //        item.AddForce(((Vector3.right - Vector3.down) / 2) * item.mass, ForceMode.Impulse);
+        //    }
+        //}
         currentPosition = Hips.localPosition;
         currentPosition.x = 0;
         Hips.localPosition = currentPosition;
+
+        if (BikeController.Instance.CurrentBikeState == BikeController.BikeControlStates.ReleaseCharacterFromBike)
+        {
+            if(Hips.transform.position.y < 5)
+            {
+                _animator.enabled = false;
+            }     
+        }
     }
 
     public void ActivateRagdoll() 
     {
-        _animator.enabled = false;
+        //_animator.enabled = false;
         foreach (var item in AllBodyRigidbody)
         {
             item.isKinematic = false;
