@@ -191,8 +191,6 @@ public class BikeController : MonoBehaviour
 
     public void ReleaseCharacter()
     {
-        if (CameraManager.Instance) CameraManager.Instance.target = CharacterController.transform.GetChild(2);
-        CameraManager.Instance.offset = Vector3.zero;
      
         CharacterController.ReleaseCharacter(body.velocity.magnitude / 2);
         if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
@@ -203,8 +201,11 @@ public class BikeController : MonoBehaviour
         body.velocity = Vector3.zero;
         body.drag = 1;
         body.mass = 10000000;
-
         CharacterController.transform.parent = null;
+
+        if (CameraManager.Instance) CameraManager.Instance.target = CharacterController.transform.GetChild(2);
+        CameraManager.Instance.offset = Vector3.zero;
+
     }
 
     void OnDrawGizmosSelected()
