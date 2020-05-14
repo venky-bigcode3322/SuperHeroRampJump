@@ -125,10 +125,10 @@ public class BikeController : MonoBehaviour
             if (applyforce)
             {
                 Vector2 dir;
-
                 dir = Vector2.up + dirOffset + Vector2.right;
                 dir.Normalize();
-                body.AddForce(dir * GlobalVariables.FuelPercentage, ForceMode2D.Impulse);
+                if(GlobalVariables.FuelPercentage > 0)
+                body.AddRelativeForce(dir * 75, ForceMode2D.Impulse);
             }
 
             // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, targetangle), angleResetTime);//,EvalutateEaseIn(multiplier));

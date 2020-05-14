@@ -12,14 +12,17 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] Slider FuelBar;
 
+    private float InitialBarPercentage;
+
     private void Awake()
     {
         Instance = this;
+        InitialBarPercentage = GlobalVariables.FuelPercentage;
     }
 
     public void CheckFuelHUD()
     {
        // Debug.Log("FuelPercentage:: " + GlobalVariables.FuelPercentage);
-        FuelBar.value = GlobalVariables.FuelPercentage / 200f;
+        FuelBar.value = GlobalVariables.FuelPercentage / InitialBarPercentage;
     }
 }

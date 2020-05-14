@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
 {
-    public static float FuelPercentage = 200;
+    public static float FuelPercentage = 100;
 }
