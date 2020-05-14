@@ -43,6 +43,8 @@ public class BikeController : MonoBehaviour
 
     float initangle = 0f;
 
+    private PolygonCollider2D boydCollider2D;
+
     private void Awake()
     {
         Instance = this;
@@ -53,6 +55,8 @@ public class BikeController : MonoBehaviour
 
         CharacterController.transform.localPosition = CharacterPose.localPosition;
         CharacterController.transform.localRotation = CharacterPose.localRotation;
+
+        boydCollider2D = GetComponent<PolygonCollider2D>();
     }
 
     private void Start()
@@ -89,6 +93,12 @@ public class BikeController : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 applyforce = false;
+            }
+
+            if (boydCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")) && !isCharacterReleased)
+            {
+                isCharacterReleased = true;
+                ReleaseCharacter();
             }
         }
 
@@ -205,7 +215,7 @@ public class BikeController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.IsTouchingLayers(9))
+        if (collision.collider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             Debug.LogError("TouchedGround");
         }

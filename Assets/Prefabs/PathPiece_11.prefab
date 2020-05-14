@@ -368,7 +368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7417621502536427055}
   - component: {fileID: 7526516135839952555}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 2dCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

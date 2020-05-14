@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5267794575319854281}
   - component: {fileID: 8368335337707083437}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 2dCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
