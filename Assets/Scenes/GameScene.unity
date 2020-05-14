@@ -13545,7 +13545,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -13559,7 +13559,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 530560627}
   m_FillRect: {fileID: 163249456}
   m_HandleRect: {fileID: 530560626}
@@ -14763,6 +14763,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2596062840146716213, guid: fb207444f721219459f1dc1dabfc33f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5674433904111943625, guid: fb207444f721219459f1dc1dabfc33f5,
         type: 3}
       propertyPath: m_Name
@@ -72372,7 +72377,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 250
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -121631,7 +121636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113119702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 180.2, y: 32.4, z: 0}
+  m_LocalPosition: {x: 163.3, y: 32.4, z: 0}
   m_LocalScale: {x: 4.02, y: 153.3058, z: 8.6691}
   m_Children: []
   m_Father: {fileID: 0}
@@ -124218,6 +124223,7 @@ MonoBehaviour:
   CurrentBikeState: 0
   CharacterPose: {fileID: 794337448}
   CharacterController: {fileID: 476876755}
+  dirOffset: {x: 0.92, y: 0}
 --- !u!1 &8311343473877926847
 GameObject:
   m_ObjectHideFlags: 0

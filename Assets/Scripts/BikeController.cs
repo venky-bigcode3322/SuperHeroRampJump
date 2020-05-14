@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,9 +27,6 @@ public class BikeController : MonoBehaviour
     [SerializeField] WheelJoint2D FrontWheelJoint;
     [SerializeField] WheelJoint2D BackWheelJoint;
 
-    RaycastHit2D rayHit_front;
-    RaycastHit2D rayHit_back;
-
     private float wheelRadius;
 
     private Vector2 BikeDirection;
@@ -42,6 +40,8 @@ public class BikeController : MonoBehaviour
     [SerializeField] Transform CharacterPose;
 
     public CharacterController CharacterController;
+
+    float initangle = 0f;
 
     private void Awake()
     {
@@ -91,26 +91,31 @@ public class BikeController : MonoBehaviour
                 applyforce = false;
             }
         }
+
+        currentPosition = transform.position;
+        currentPosition.y = Mathf.Clamp(currentPosition.y, 0, 50);
+        transform.position = currentPosition;
     }
 
     bool applyforce = false;
 
     private Vector3 currentPosition;
 
+    [SerializeField] Vector2 dirOffset;
+
+    bool isGrounded = false;
+
     private void FixedUpdate()
     {
         Vector2 frontWheelStartPoint = FrontWheel.transform.position - (transform.up * (wheelRadius + 0.01f));
         Vector2 backWheelStartPoint = BackWheel.transform.position - (transform.up * (wheelRadius + 0.01f));
-
-        rayHit_front = Physics2D.Raycast(frontWheelStartPoint, -transform.up, wheelRadius + 0.01f);
-        rayHit_back = Physics2D.Raycast(backWheelStartPoint, -transform.up, wheelRadius + 0.01f);
 
         if(CurrentBikeState == BikeControlStates.StartMovingState)
         {
             BikeDirection = FrontWheel.position - BackWheel.position;
             BikeDirection.Normalize();
 
-            MoveForce += 100;
+            MoveForce += 650;
            
             ApplyTorqueBike();
         }
@@ -119,62 +124,90 @@ public class BikeController : MonoBehaviour
         {
             if (applyforce)
             {
-                float speed = body.velocity.magnitude;
-                float angularSpeed = body.angularVelocity;
-
                 Vector2 dir;
-                //if (transform.position.y >= 50)
-                //    dir = Vector2.right;
-                //else
-                    dir = Vector2.up + Vector2.right;
 
+                dir = Vector2.up + dirOffset + Vector2.right;
                 dir.Normalize();
-                body.AddForce(transform.right * GlobalVariables.FuelPercentage, ForceMode2D.Impulse);
+                body.AddForce(dir * GlobalVariables.FuelPercentage, ForceMode2D.Impulse);
+            }
 
-                body.angularVelocity = 0;
-                //body.gravityScale = 0.5f;
+            // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, targetangle), angleResetTime);//,EvalutateEaseIn(multiplier));
 
-                //var q = Quaternion.LookRotation(dir);//(Vector2.up + Vector2.left);
-                //body.MoveRotation(Quaternion.RotateTowards(transform.rotation,  q, 5 * Time.deltaTime));
+            if (valuesync == 0)
+            {
+                body.angularVelocity = 10;
+                timer += 0.1f;
+                if (timer > 10) { valuesync = 1; timer = 0; }
+            }
+            else if (valuesync == 1)
+            {
+                body.angularVelocity = -10;
+                timer += 0.1f;
+                if (timer > 20) { valuesync = 2; timer = 0; }
+            }
+            else if (valuesync == 2)
+            {
+                body.angularVelocity = 10;
+                timer += 0.1f;
+                if (timer > 15) { valuesync = 3; timer = 0; }
+            }
+            else if (valuesync == 3)
+            {
+                body.angularVelocity = -10;
+                timer += 0.1f;
+                if (timer > 10) { valuesync = 0; timer = 0; }
             }
         }
-        //currentPosition = transform.position;
-        //currentPosition.y = Mathf.Clamp(currentPosition.y,0,100);
-        //transform.position = currentPosition;
     }
+
+    int valuesync = 0;
+    float timer = 0f;
 
     public void ApplyTorqueBike()
     {
-        Debug.Log("applying torque");
         body.AddRelativeForce( MoveForce * BikeDirection * Time.deltaTime);
     }
 
     public void ActivateFuel()
     {
         CurrentBikeState = BikeControlStates.CanTapForBoostState;
+        initangle = transform.eulerAngles.z;
+       // targetangle = initangle - 20;
+        body.angularVelocity = 0;
         FrontWheel.simulated = false;
         BackWheel.simulated = false;
-        
     }
 
     public void ReleaseCharacter()
     {
         if (CameraManager.Instance) CameraManager.Instance.target = CharacterController.transform.GetChild(2);
-        CharacterController.transform.parent = null;
-        CharacterController.ReleaseCharacter();
+        CameraManager.Instance.offset = Vector3.zero;
+     
+        CharacterController.ReleaseCharacter(body.velocity.magnitude / 2);
         if (CurrentBikeState == BikeControlStates.StartMovingState)
         {
             CurrentBikeState = BikeControlStates.ReleaseCharacterFromBike;
         }
 
-        //body.velocity = body.velocity / 4;
-        //body.mass = 10000000;
+        body.velocity = Vector3.zero;
+        body.drag = 1;
+        body.mass = 10000000;
+
+        CharacterController.transform.parent = null;
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Vector2 direction = transform.TransformDirection(Vector2.up + Vector2.left) * 5;
+        Vector2 direction = (Vector2.up + dirOffset + Vector2.right) * 5;
         Gizmos.DrawRay(transform.position, direction);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.IsTouchingLayers(9))
+        {
+            Debug.LogError("TouchedGround");
+        }
     }
 }

@@ -37,7 +37,7 @@ public class CharacterController : MonoBehaviour
         Hips.transform.GetChild(2).tag = "Player";
     }
 
-    public void ReleaseCharacter()
+    public void ReleaseCharacter(float val)
     {
         _animator.SetTrigger("TPose");
 
@@ -46,19 +46,25 @@ public class CharacterController : MonoBehaviour
         _rigidbody.useGravity = true;
         ActivateRagdoll();
 
-        transform.rotation = Quaternion.LookRotation(Vector3.down - transform.up);
+        transform.rotation = Quaternion.LookRotation(Vector3.right);
+
+        Debug.LogError("Velocity:: " + val);
+        foreach (var item in AllBodyRigidbody)
+        {
+            item.AddForce(Vector3.right * item.mass * val, ForceMode.Impulse);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            applyforce = true;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            applyforce = false;
-        }
+        //if (Input.GetMouseButton(0))
+        //{
+        //    applyforce = true;
+        //}
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    applyforce = false;
+        //}
     }
 
 
@@ -86,7 +92,7 @@ public class CharacterController : MonoBehaviour
         foreach (var item in AllBodyRigidbody)
         {
             item.isKinematic = false;
-            item.AddForce(Vector3.right * item.mass * 50, ForceMode.Impulse);
+            //item.AddForce(Vector3.right * item.mass * 50, ForceMode.Impulse);
         }
 
         foreach (var item in AllBodyColliders)
