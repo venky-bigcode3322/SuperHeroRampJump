@@ -250,7 +250,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4e94f2f01979abf4197c00216e711066, type: 2}
+  - {fileID: 2100000, guid: 38674bc3a39444c40b1ac794976b050f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2296,7 +2296,7 @@ GameObject:
   - component: {fileID: 7957647986221671043}
   - component: {fileID: 7322267038415161190}
   m_Layer: 8
-  m_Name: SuperHero_1
+  m_Name: SuperHero_3
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2309,7 +2309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6156733987358396668}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.493, y: -1.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2367,7 +2367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e539732968cb346873fcc1bb220e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  animator: {fileID: 0}
   Hips: {fileID: 7264473080367874153}
 --- !u!1 &6209330365788975205
 GameObject:
