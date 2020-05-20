@@ -1,28 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance
+    public static GameManager instance
     {
         get;private set;
     }
-    
-    [SerializeField] Slider FuelBar;
 
-    private float InitialBarPercentage;
+    [SerializeField] Slider fuelBar;
+
+    public GameObject[] superHeroCharacters;
+
+    public GameObject[] bikes;
+
+    [SerializeField] Transform spawnPoint;
+
+    private float _initialBarPercentage;
 
     private void Awake()
     {
-        Instance = this;
-        InitialBarPercentage = GlobalVariables.FuelPercentage;
+        instance = this;
+        _initialBarPercentage = GlobalVariables.FuelPercentage;
     }
 
-    public void CheckFuelHUD()
+    private void Start()
     {
-       // Debug.Log("FuelPercentage:: " + GlobalVariables.FuelPercentage);
-        FuelBar.value = GlobalVariables.FuelPercentage / InitialBarPercentage;
+        InstantiateBike();
+    }
+
+    public void CheckFuelHud()
+    {
+        fuelBar.value = GlobalVariables.FuelPercentage / _initialBarPercentage;
+    }
+
+    private void InstantiateBike()
+    {
+        var obj = Instantiate(bikes[0]) as GameObject;
+        obj.transform.position = spawnPoint.position;
+        if (CameraManager.Instance) CameraManager.Instance.target = obj.transform;
+    }
+
+    public CharacterController InstantiateSuperHero(Transform initTransform)
+    {
+        var obj = Instantiate(superHeroCharacters[GlobalVariables.selectedCharacter], initTransform.parent) as GameObject;
+
+        obj.transform.localPosition = initTransform.localPosition;
+
+        return obj.GetComponent<CharacterController>();
     }
 }

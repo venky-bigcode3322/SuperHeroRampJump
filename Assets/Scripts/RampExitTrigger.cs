@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RampExitTrigger : MonoBehaviour
 {
-    bool isTriggered = false;
+    private bool _isTriggered = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isTriggered)
+        if (!_isTriggered)
         {
-            isTriggered = true;
-            if (BikeController.Instance) BikeController.Instance.ActivateFuel();
+            _isTriggered = true;
+            if (BikeController.instance) BikeController.instance.ActivateFuel();
         }
     }
 }

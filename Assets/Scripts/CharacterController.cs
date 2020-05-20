@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CharacterController : MonoBehaviour
 {
-    [SerializeField] Animator _animator;
+    [SerializeField] Animator animator;
 
     private List<Collider> AllBodyColliders = new List<Collider>();
     private List<Rigidbody> AllBodyRigidbody = new List<Rigidbody>();
@@ -30,8 +31,7 @@ public class CharacterController : MonoBehaviour
          
         _rigidbody = GetComponent<Rigidbody>();
 
-        _animator = GetComponent<Animator>();
-        _animator.SetTrigger("DrivePose");
+        animator = GetComponent<Animator>();
 
         Hips.transform.GetChild(2).GetComponent<Collider>().enabled = true;
         Hips.transform.GetChild(2).tag = "Player";
@@ -39,23 +39,28 @@ public class CharacterController : MonoBehaviour
 
     public void ReleaseCharacter(float val)
     {
-        _animator.SetTrigger("Flying");
+        animator.SetTrigger(Flying);
 
-        transform.rotation = Quaternion.LookRotation(Vector3.down - transform.up);
+        var transform1 = transform;
+        var rotation = transform1.rotation;
+        rotation = Quaternion.LookRotation(Vector3.down - transform1.up);
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = true;
         ActivateRagdoll();
 
-        transform.rotation = Quaternion.LookRotation(Vector3.right);
+        rotation = Quaternion.LookRotation(Vector3.right);
+        transform.rotation = rotation;
 
         Debug.LogError("Velocity:: " + val);
         foreach (var item in AllBodyRigidbody)
         {
-            item.AddForce(Vector3.right * item.mass * val, ForceMode.Impulse);
+            item.AddForce(Vector3.right * (item.mass * val), ForceMode.Impulse);
         }
     }
 
-    private Vector3 currentPosition;
+    private Vector3 _currentPosition;
+    private static readonly int DriverPose = Animator.StringToHash("DriverPose");
+    private static readonly int Flying = Animator.StringToHash("Flying");
 
     private void FixedUpdate()
     {
@@ -66,20 +71,20 @@ public class CharacterController : MonoBehaviour
         //        item.AddForce(((Vector3.right - Vector3.down) / 2) * item.mass, ForceMode.Impulse);
         //    }
         //}
-        currentPosition = Hips.localPosition;
-        currentPosition.x = 0;
-        Hips.localPosition = currentPosition;
+        _currentPosition = Hips.localPosition;
+        _currentPosition.x = 0;
+        Hips.localPosition = _currentPosition;
 
-        if (BikeController.Instance.CurrentBikeState == BikeController.BikeControlStates.ReleaseCharacterFromBike)
+        if (BikeController.instance.currentBikeState == BikeController.BikeControlStates.ReleaseCharacterFromBike)
         {
             if(Hips.transform.position.y < 5)
             {
-                _animator.enabled = false;
+                animator.enabled = false;
             }     
         }
     }
 
-    public void ActivateRagdoll() 
+    private void ActivateRagdoll() 
     {
         //_animator.enabled = false;
         foreach (var item in AllBodyRigidbody)
@@ -94,5 +99,10 @@ public class CharacterController : MonoBehaviour
         }
 
         _rigidbody.useGravity = true;
+    }
+
+    public void SetDriverPose(int index)
+    {
+        animator.SetInteger(DriverPose, index);
     }
 }

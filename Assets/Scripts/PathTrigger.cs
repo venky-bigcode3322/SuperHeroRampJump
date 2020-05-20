@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class PathTrigger : MonoBehaviour
 {
-    bool isTriggered = false;
+    private bool _isTriggered = false;
 
-    private void OnEnable()
-    {
-        isTriggered = false;
-    }
+    private void OnEnable() => _isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.CompareTag("Player") && !isTriggered)
+        if (other.transform.root.CompareTag("Player") && !_isTriggered)
         {
             if (PathLoopManager.Instance) PathLoopManager.Instance.AssignNewPath();
-            isTriggered = true;
+            _isTriggered = true;
         }
     }
 }

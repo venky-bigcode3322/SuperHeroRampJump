@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
 
     public Vector3 offset;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
         lerpDistance = distance;
@@ -32,29 +32,31 @@ public class CameraManager : MonoBehaviour
     public void ActivateTurnCamera()
     {
         lerpHeight += 10;
-        Invoke("turnOn", 2.2f);
+        Invoke(nameof(turnOn), 2.2f);
     }
 
-    void turnOn()
+    private void turnOn()
     {
         turnAround = true;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (target)
         {
             if (!turnAround)
             {
                 // Calculate the current rotation angles
-                float wantedRotationAngle = target.eulerAngles.y;
+                var wantedRotationAngle = target.eulerAngles.y;
 
                 height = Mathf.Lerp(height, lerpHeight, Time.deltaTime * 2);
 
-                float wantedHeight = target.position.y + height;
+                var position = target.position;
+                var wantedHeight = position.y + height;
 
-                float currentRotationAngle = transform.eulerAngles.y;
-                float currentHeight = transform.position.y;
+                var transform1 = transform;
+                var currentRotationAngle = transform1.eulerAngles.y;
+                var currentHeight = transform1.position.y;
 
                 // Damp the rotation around the y-axis
                 currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle + offset.y, rotationDamping * Time.deltaTime);
@@ -70,7 +72,7 @@ public class CameraManager : MonoBehaviour
 
                 distance = Mathf.Lerp(distance, lerpDistance, Time.deltaTime * 2);
 
-                Vector3 pos = target.position;
+                var pos = position;
                 pos -= currentRotation * Vector3.forward * distance;
                 pos.y = currentHeight;
                 transform.position = pos;

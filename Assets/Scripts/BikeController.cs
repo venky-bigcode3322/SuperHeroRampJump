@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-//using System.Numerics;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BikeController : MonoBehaviour
 {
-    public static BikeController Instance
+    public static BikeController instance
     {
         get;private set;
     }
@@ -19,196 +16,196 @@ public class BikeController : MonoBehaviour
         ReleaseCharacterFromBike
     }
 
-    private Rigidbody2D body;
+    private Rigidbody2D _body;
 
-    [SerializeField] Rigidbody2D FrontWheel;
-    [SerializeField] Rigidbody2D BackWheel;
+     [SerializeField] private Rigidbody2D frontWheel;
+     [SerializeField] private Rigidbody2D backWheel;
 
-    [SerializeField] WheelJoint2D FrontWheelJoint;
-    [SerializeField] WheelJoint2D BackWheelJoint;
+    [SerializeField]
+    private WheelJoint2D frontWheelJoint;
+    [SerializeField]
+    private WheelJoint2D backWheelJoint;
 
-    private float wheelRadius;
+    private float _wheelRadius;
 
-    private Vector2 BikeDirection;
+    private Vector2 _bikeDirection;
 
-    private float MoveForce = 0;
+    private float _moveForce = 0;
 
-    [SerializeField] Text SpeedText;
+    public BikeControlStates currentBikeState = BikeControlStates.InitState;
 
-    public BikeControlStates CurrentBikeState = BikeControlStates.InitState;
+    [SerializeField]
+    private Transform characterPose;
 
-    [SerializeField] Transform CharacterPose;
+    public CharacterController characterController;
 
-    public CharacterController CharacterController;
+    private float _initangle = 0f;
 
-    float initangle = 0f;
+    [SerializeField] private int driverPoseIndex = 0;
 
-    private PolygonCollider2D boydCollider2D;
+    private Collider2D _boydCollider2D;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
 
-        wheelRadius = FrontWheel.GetComponent<CircleCollider2D>().radius;
+        _wheelRadius = frontWheel.GetComponent<CircleCollider2D>().radius;
 
-        body = this.GetComponent<Rigidbody2D>();
+        _body = this.GetComponent<Rigidbody2D>();
 
-        CharacterController.transform.localPosition = CharacterPose.localPosition;
-        CharacterController.transform.localRotation = CharacterPose.localRotation;
-
-        boydCollider2D = GetComponent<PolygonCollider2D>();
+        _boydCollider2D = GetComponent<BoxCollider2D>();
     }
 
     private void Start()
     {
-        CurrentBikeState = BikeControlStates.InitState;
+        characterController = GameManager.instance.InstantiateSuperHero(characterPose);
+        characterController.SetDriverPose(driverPoseIndex);
+        currentBikeState = BikeControlStates.InitState;
     }
 
-    private bool isCharacterReleased = false;
+    private bool _isCharacterReleased = false;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if(CurrentBikeState == BikeControlStates.InitState)
+            if(currentBikeState == BikeControlStates.InitState)
             {
-                CurrentBikeState = BikeControlStates.StartMovingState;
+                currentBikeState = BikeControlStates.StartMovingState;
             }
         }
 
-        if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
+        if (currentBikeState == BikeControlStates.CanTapForBoostState)
         {
             if (Input.GetMouseButton(0) && GlobalVariables.FuelPercentage > 0)
             {
-                applyforce = true;
+                _applyforce = true;
                 GlobalVariables.FuelPercentage -= Time.deltaTime * 20;
-                GameManager.Instance.CheckFuelHUD();
+                GameManager.instance.CheckFuelHud();
 
-                if (!isCharacterReleased && GlobalVariables.FuelPercentage <= 0)
+                if (!_isCharacterReleased && GlobalVariables.FuelPercentage <= 0)
                 {
-                    isCharacterReleased = true;
+                    _isCharacterReleased = true;
                     ReleaseCharacter();
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                applyforce = false;
+                _applyforce = false;
             }
 
-            if (boydCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")) && !isCharacterReleased)
+            if (_boydCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")) && !_isCharacterReleased)
             {
-                isCharacterReleased = true;
+                _isCharacterReleased = true;
                 ReleaseCharacter();
             }
         }
 
-        currentPosition = transform.position;
-        currentPosition.y = Mathf.Clamp(currentPosition.y, 0, 50);
-        transform.position = currentPosition;
+        _currentPosition = transform.position;
+        _currentPosition.y = Mathf.Clamp(_currentPosition.y, 0, 50);
+        transform.position = _currentPosition;
     }
 
-    bool applyforce = false;
+    private bool _applyforce = false;
 
-    private Vector3 currentPosition;
+    private Vector3 _currentPosition;
 
-    [SerializeField] Vector2 dirOffset;
+    [SerializeField] private Vector2 dirOffset;
 
-    bool isGrounded = false;
+    private bool _isGrounded = false;
 
     private void FixedUpdate()
     {
-        Vector2 frontWheelStartPoint = FrontWheel.transform.position - (transform.up * (wheelRadius + 0.01f));
-        Vector2 backWheelStartPoint = BackWheel.transform.position - (transform.up * (wheelRadius + 0.01f));
+        var up = transform.up;
+        Vector2 frontWheelStartPoint = frontWheel.transform.position - (up * (_wheelRadius + 0.01f));
+        Vector2 backWheelStartPoint = backWheel.transform.position - (up * (_wheelRadius + 0.01f));
 
-        if(CurrentBikeState == BikeControlStates.StartMovingState)
+        if(currentBikeState == BikeControlStates.StartMovingState)
         {
-            BikeDirection = FrontWheel.position - BackWheel.position;
-            BikeDirection.Normalize();
+            _bikeDirection = frontWheel.position - backWheel.position;
+            _bikeDirection.Normalize();
 
-            MoveForce += 650;
+            _moveForce += 650;
            
             ApplyTorqueBike();
         }
 
-        if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
+        if (currentBikeState == BikeControlStates.CanTapForBoostState)
         {
-            if (applyforce)
+            if (_applyforce)
             {
-                Vector2 dir;
-                dir = Vector2.up + dirOffset + Vector2.right;
+                var dir = Vector2.up + dirOffset + Vector2.right;
                 dir.Normalize();
                 if(GlobalVariables.FuelPercentage > 0)
-                body.AddRelativeForce(dir * 75, ForceMode2D.Impulse);
+                _body.AddRelativeForce(dir * 75, ForceMode2D.Impulse);
             }
 
             // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, targetangle), angleResetTime);//,EvalutateEaseIn(multiplier));
 
-            if (valuesync == 0)
+            if (_valuesync == 0)
             {
-                body.angularVelocity = 10;
-                timer += 0.1f;
-                if (timer > 10) { valuesync = 1; timer = 0; }
+                _body.angularVelocity = 10;
+                _timer += 0.1f;
+                if (_timer > 10) { _valuesync = 1; _timer = 0; }
             }
-            else if (valuesync == 1)
+            else if (_valuesync == 1)
             {
-                body.angularVelocity = -10;
-                timer += 0.1f;
-                if (timer > 20) { valuesync = 2; timer = 0; }
+                _body.angularVelocity = -10;
+                _timer += 0.1f;
+                if (_timer > 20) { _valuesync = 2; _timer = 0; }
             }
-            else if (valuesync == 2)
+            else if (_valuesync == 2)
             {
-                body.angularVelocity = 10;
-                timer += 0.1f;
-                if (timer > 15) { valuesync = 3; timer = 0; }
+                _body.angularVelocity = 10;
+                _timer += 0.1f;
+                if (_timer > 15) { _valuesync = 3; _timer = 0; }
             }
-            else if (valuesync == 3)
+            else if (_valuesync == 3)
             {
-                body.angularVelocity = -10;
-                timer += 0.1f;
-                if (timer > 10) { valuesync = 0; timer = 0; }
+                _body.angularVelocity = -10;
+                _timer += 0.1f;
+                if (_timer > 10) { _valuesync = 0; _timer = 0; }
             }
         }
     }
 
-    int valuesync = 0;
-    float timer = 0f;
+    private int _valuesync = 0;
+    private float _timer = 0f;
 
-    public void ApplyTorqueBike()
+    private void ApplyTorqueBike()
     {
-        body.AddRelativeForce( MoveForce * BikeDirection * Time.deltaTime);
+        _body.AddRelativeForce( _bikeDirection * (_moveForce * Time.deltaTime));
     }
 
     public void ActivateFuel()
     {
-        CurrentBikeState = BikeControlStates.CanTapForBoostState;
-        initangle = transform.eulerAngles.z;
+        currentBikeState = BikeControlStates.CanTapForBoostState;
+        _initangle = transform.eulerAngles.z;
        // targetangle = initangle - 20;
-        body.angularVelocity = 0;
-        FrontWheel.simulated = false;
-        BackWheel.simulated = false;
+        _body.angularVelocity = 0;
+        frontWheel.simulated = false;
+        backWheel.simulated = false;
     }
 
-    public void ReleaseCharacter()
+    private void ReleaseCharacter()
     {
-     
-        CharacterController.ReleaseCharacter(body.velocity.magnitude / 2);
-        if (CurrentBikeState == BikeControlStates.CanTapForBoostState)
+        characterController.ReleaseCharacter(_body.velocity.magnitude / 2);
+        if (currentBikeState == BikeControlStates.CanTapForBoostState)
         {
-            CurrentBikeState = BikeControlStates.ReleaseCharacterFromBike;
+            currentBikeState = BikeControlStates.ReleaseCharacterFromBike;
         }
 
-        body.velocity = Vector3.zero;
-        body.drag = 1;
-        body.mass = 10000000;
-        CharacterController.transform.parent = null;
+        _body.velocity = Vector3.zero;
+        _body.drag = 1;
+        _body.mass = 10000000;
+        characterController.transform.parent = null;
 
-        if (CameraManager.Instance) CameraManager.Instance.target = CharacterController.transform.GetChild(2);
+        if (CameraManager.Instance) CameraManager.Instance.target = characterController.transform.GetChild(2);
         CameraManager.Instance.offset = Vector3.zero;
-
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Vector2 direction = (Vector2.up + dirOffset + Vector2.right) * 5;
