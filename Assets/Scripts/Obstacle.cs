@@ -1,0 +1,44 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Obstacle : ObstacleBase
+{
+    [SerializeField] ObstaclesTypes _obstaclesTypes;
+
+    public override ObstaclesTypes obstacleType { get => _obstaclesTypes; }
+
+    private Vector3 initialPosition;
+    private Vector3 initialRotation;
+
+    private void Awake()
+    {
+        initialPosition = transform.localPosition;
+    }
+
+    private void OnEnable() => resetPosition();
+
+    private bool saveInitialData = false;
+
+    private bool isTriggered = false;
+    
+    void resetPosition()
+    {
+        if(!saveInitialData)
+        {
+            saveInitialData = true;
+            initialPosition = transform.localPosition;
+            initialRotation = transform.localRotation.eulerAngles;
+        }
+        transform.localPosition = initialPosition;
+        transform.localRotation = Quaternion.Euler(initialRotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Bike"))
+        {
+            Debug.Log("Colliding:: + "+ collision.collider.name);
+        }
+    }
+}
