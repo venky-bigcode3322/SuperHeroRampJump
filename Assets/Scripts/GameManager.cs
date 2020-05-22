@@ -4,10 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance
-    {
-        get;private set;
-    }
+    public static GameManager instance { get;private set; }
 
     [SerializeField] Slider fuelBar;
 
@@ -18,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform spawnPoint;
 
     private float _initialBarPercentage;
+
+    [SerializeField] private Transform StartPoint;
 
     private void Awake()
     {

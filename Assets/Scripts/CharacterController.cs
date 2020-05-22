@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 public class CharacterController : MonoBehaviour
@@ -13,6 +14,12 @@ public class CharacterController : MonoBehaviour
     private Rigidbody _rigidbody;
 
     [SerializeField] Transform Hips;
+
+    private Transform StartPoint;
+
+    public bool _CalculateDistance = false;
+
+    private Text DistanceText;
 
     private void Awake()
     {
@@ -35,6 +42,13 @@ public class CharacterController : MonoBehaviour
 
         Hips.transform.GetChild(2).GetComponent<Collider>().enabled = true;
         Hips.transform.GetChild(2).tag = "Player";
+
+        StartPoint = GameObject.Find("StartPoint").transform;
+    }
+
+    private void Start() 
+    {
+        if (IngamePage.Instance) DistanceText = IngamePage.Instance.DistanceText;
     }
 
     public void ReleaseCharacter(float val)
@@ -80,8 +94,18 @@ public class CharacterController : MonoBehaviour
             if(Hips.transform.position.y < 5)
             {
                 animator.enabled = false;
-            }     
+            }
         }
+
+        if (_CalculateDistance && Time.frameCount % 2 == 0)
+        {
+            DistanceText.text = Mathf.RoundToInt(CalculateDistance) + "m";
+        }
+    }
+
+    public float CalculateDistance
+    {
+        get => Mathf.Sqrt((StartPoint.position - Hips.position).sqrMagnitude);
     }
 
     private void ActivateRagdoll() 

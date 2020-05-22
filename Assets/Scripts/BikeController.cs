@@ -45,6 +45,8 @@ public class BikeController : MonoBehaviour
 
     private Collider2D _boydCollider2D;
 
+    [SerializeField] private Collider _dummyCollider;
+
     private void Awake()
     {
         instance = this;
@@ -186,10 +188,13 @@ public class BikeController : MonoBehaviour
         _body.angularVelocity = 0;
         frontWheel.simulated = false;
         backWheel.simulated = false;
+        characterController._CalculateDistance = true;
     }
 
     private void ReleaseCharacter()
     {
+        _dummyCollider.enabled = false;
+
         characterController.ReleaseCharacter(_body.velocity.magnitude / 2);
         if (currentBikeState == BikeControlStates.CanTapForBoostState)
         {

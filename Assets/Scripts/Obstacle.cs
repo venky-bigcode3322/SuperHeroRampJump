@@ -11,10 +11,7 @@ public class Obstacle : ObstacleBase
     private Vector3 initialPosition;
     private Vector3 initialRotation;
 
-    private void Awake()
-    {
-        initialPosition = transform.localPosition;
-    }
+    private void Awake() => initialPosition = transform.localPosition;
 
     private void OnEnable() => resetPosition();
 
@@ -32,13 +29,19 @@ public class Obstacle : ObstacleBase
         }
         transform.localPosition = initialPosition;
         transform.localRotation = Quaternion.Euler(initialRotation);
+
+        if (isTriggered) isTriggered = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Bike"))
+        if (!isTriggered) 
         {
-            Debug.Log("Colliding:: + "+ collision.collider.name);
+            if (collision.transform.CompareTag("Bike") || collision.transform.root.CompareTag("Player"))
+            {
+                isTriggered = true;
+                Debug.Log("Colliding:: + "+ collision.collider.name);
+            }
         }
     }
 }

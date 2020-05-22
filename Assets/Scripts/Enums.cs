@@ -7,6 +7,7 @@
         Ingame = 2,
         BikeSelection = 3,
         CharacterSelection = 4,
+        FinishPage = 5
     }
 
     public enum VehicleUnlockType

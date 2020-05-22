@@ -11,6 +11,8 @@ public class PathLoopManager : MonoBehaviour
         get;private set;
     }
 
+    [SerializeField] GameObject InitPiece;
+
     [SerializeField] GameObject[] PathPrefabs;
 
     private List<Transform> AvailablePaths = new List<Transform>();
@@ -18,6 +20,8 @@ public class PathLoopManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if (!InitPiece.activeSelf)
+            InitPiece.SetActive(true);
     }
 
     private void Start()
