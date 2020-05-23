@@ -1,0 +1,29 @@
+{
+  "MenuAd": {
+    "excludeMenuAds": [
+      "com.test.testgamename"
+    ],
+    "BigCodeAd": {
+      "Landscape_Link": "https://bigcode.s3.amazonaws.com/main/ads/train.jpg",
+      "Portrait_Link": "https://bigcode.s3.amazonaws.com/main/ads/train_P.jpg",
+      "PackageName": "com.mtfreegames.truckvsbusracing"
+    }
+  },
+  "Discount": {
+    "isAvailable": false,
+    "DisCountText": "Get Special discount of flat 50% off"
+  },
+  "ExitPage": {
+    "Landscape_Link": "https://integergames.s3.amazonaws.com/exit.html",
+    "Portrait_Link": "https://integergames.s3.amazonaws.com/exit_all.html"
+  },
+  "MoreGames": "com.mtfreegames.truckvsbusracing",
+  "MiniMoreGames": {
+    "folderLocation": "https://bigcode.s3.amazonaws.com/allicons/",
+    "miniGamesPkg": [
+      "com.mtfreegames.truckvsbusracing",
+      "com.mtsfreegames.bikerace2018",
+      "com.mtsfreegames.hollywoodgangsters"
+    ]
+  }
+}

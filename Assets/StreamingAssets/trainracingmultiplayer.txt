@@ -1,0 +1,64 @@
+{
+  "MenuAds": [
+    0,
+    2
+  ],
+  "VideoAds": [
+    2,
+    3,
+    1,
+	4
+  ],
+  "RewardVideoAds": [
+    4,
+    2,
+    1,
+	3
+  ],
+  "InterstitialAds": [
+    4,
+    2,
+    1,
+	3
+  ],
+  "Promo": {
+    "isEnabled": true,
+    "PromoCoins": 5000,
+    "PromoCode": "Promo2018"
+  },
+  "Share": {
+    "FacebookShare": "http://bigcode.co.in/trainracingmultiplayer/fb/",
+    "WhatsAppShare": "http://bigcode.co.in/trainracingmultiplayer/wa/",
+    "TwitterShare": "http://bigcode.co.in/trainracingmultiplayer/tw/"
+  },
+  "RatePopUp": {
+    "levelNumbers": [
+      3,
+      7,
+      10
+    ],
+    "message": "Love Train Racing Games 3D 2 Player\nPlease Rate us!",
+    "Coins": 0
+  },
+  "SharePopUp": {
+    "levelNumbers": [
+      5,
+      8,
+      9
+    ],
+    "message": "Love Train Racing Games 3D 2 Player\nPlease Share!",
+    "Coins": 0
+  },
+  "AdsDelay": {
+    "AdToAdDelay": 30,
+    "LevelCompletedDelay": 2.2,
+    "LevelFailedDelay": 1.2
+  },
+  "version":{
+   "armv7": "6.9",
+   "x86": "11.5"
+  },
+  "isBannerAdAvailable": false,
+  "isMiniBannerAdAvailable": true
+  
+}

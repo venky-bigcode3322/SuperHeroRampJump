@@ -5,16 +5,17 @@ using System.IO;
 public class PlayerPrefsDelete : EditorWindow
 {
 
-	[MenuItem ("BigCode/PlayerPrefs/Delete %q")]
+	[MenuItem ("BigCode/PlayerPrefs/Delete")]
 	public static void DeletePrefs ()
 	{
         if (EditorUtility.DisplayDialog("BigCode", "Are you sure? Do you wanna delete playerprefs", "Yes","No"))
         {
-            File.Delete(Application.persistentDataPath + "/DailyMission.dat");
+            File.Delete(GameConstants_BigCode.LocalGameDataPath);
 
             PlayerPrefs.DeleteAll();
 
             EditorUtility.DisplayDialog("BigCode", "PlayerPrefs deleted successfully", "Ok");
         }
 	}
+
 }
