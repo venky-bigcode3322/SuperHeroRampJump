@@ -38,4 +38,9 @@ public class BikeSelectionPage : PopupBase
         BikeTypeScrollViews[index].SetActive(true);
         currentBikeType = index;
     }
+
+    public void BackButton()
+    {
+        if (UiHandler.Instance) UiHandler.Instance.CheckAndClosePopup();
+    }
 }

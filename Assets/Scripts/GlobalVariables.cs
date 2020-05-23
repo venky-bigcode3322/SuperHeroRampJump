@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
 {
+    public static string NextSceneToLoad = "GameScene";
+
     public static float FuelPercentage = 21;
+
+    public static float LevelReward;
+
+    public static int BonusReward;
+
+    public static float AirTime;
 
     public delegate void CoinsUpdate(int coins);
 
@@ -13,6 +21,12 @@ public class GlobalVariables : MonoBehaviour
     public delegate void DiamondsUpdate(int Diamonds);
 
     public static event DiamondsUpdate DiamondUpdateEvent;
+
+    public static void ResetScoreValues()
+    {
+        LevelReward = BonusReward = 0;
+        AirTime = 0;
+    }
 
     public static int selectedCharacter
     {

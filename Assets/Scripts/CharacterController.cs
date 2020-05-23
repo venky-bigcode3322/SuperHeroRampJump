@@ -21,6 +21,8 @@ public class CharacterController : MonoBehaviour
 
     private Text DistanceText;
 
+    private AirTimeDetector AirTimeDetector;
+
     private void Awake()
     {
         foreach (var item in GetComponentsInChildren<Rigidbody>())
@@ -44,6 +46,8 @@ public class CharacterController : MonoBehaviour
         Hips.transform.GetChild(2).tag = "Player";
 
         StartPoint = GameObject.Find("StartPoint").transform;
+
+        AirTimeDetector = GetComponentInChildren<AirTimeDetector>();
     }
 
     private void Start() 
@@ -80,12 +84,15 @@ public class CharacterController : MonoBehaviour
 
     private bool checkTheMovement = false;
 
+    public bool IsDead = false;
+
     private void Update()
     {
+        if (IsDead)
+            return;
+
         if (checkTheMovement)
         {
-            Debug.LogError("Velocity: " + AllBodyRigidbody[1].velocity.magnitude);
-
             if (AllBodyRigidbody[1].velocity.magnitude <= 0.5f)
             {
                 checkTheMovement = false;
@@ -98,6 +105,8 @@ public class CharacterController : MonoBehaviour
             }
         }
     }
+
+    private float Airtimer = 0;
 
     private Vector3 _currentPosition;
     private static readonly int DriverPose = Animator.StringToHash("DriverPose");
@@ -121,6 +130,15 @@ public class CharacterController : MonoBehaviour
             if(Hips.transform.position.y < 5)
             {
                 animator.enabled = false;
+            }
+
+            if (!AirTimeDetector.isGrounded && Time.frameCount % 2 == 0)
+            {
+                Airtimer += Time.deltaTime;
+                if (IngamePage.Instance) IngamePage.Instance.AirTimeText.text = System.Math.Round(Airtimer, 2).ToString();
+                double airtimeScore = System.Math.Round((Airtimer / 50f * 1000f), 0);
+                if (IngamePage.Instance) IngamePage.Instance.AirTimeScoreText.text = airtimeScore.ToString();
+                GlobalVariables.AirTime = System.Convert.ToSingle(airtimeScore);
             }
         }
 

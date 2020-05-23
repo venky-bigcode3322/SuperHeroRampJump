@@ -36,4 +36,9 @@ public class CharacterSelectionPage : PopupBase
         GlobalVariables.selectedCharacter = index;
         SetPageDetails();
     }
+
+    public void BackButton()
+    {
+        if (UiHandler.Instance) UiHandler.Instance.CheckAndClosePopup();
+    }
 }

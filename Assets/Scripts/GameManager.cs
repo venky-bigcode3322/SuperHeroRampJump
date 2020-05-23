@@ -18,15 +18,25 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Transform StartPoint;
 
+    [SerializeField] GameObject DustParticle;
+
+    public ObjectPooling DustParticlePool;
+
     private void Awake()
     {
         instance = this;
+
         _initialBarPercentage = GlobalVariables.FuelPercentage;
+
+        DustParticlePool = new ObjectPooling();
+        DustParticlePool.InitializePool(DustParticle);
     }
 
     private void Start()
     {
         InstantiateBike();
+
+        GlobalVariables.ResetScoreValues(); 
     }
 
     public void CheckFuelHud()
