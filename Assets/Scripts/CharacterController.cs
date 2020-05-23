@@ -70,6 +70,33 @@ public class CharacterController : MonoBehaviour
         {
             item.AddForce(Vector3.right * (item.mass * val), ForceMode.Impulse);
         }
+        Invoke("EnableVelocityCheck", 2);
+    }
+
+    void EnableVelocityCheck()
+    {
+        checkTheMovement = true;
+    }
+
+    private bool checkTheMovement = false;
+
+    private void Update()
+    {
+        if (checkTheMovement)
+        {
+            Debug.LogError("Velocity: " + AllBodyRigidbody[1].velocity.magnitude);
+
+            if (AllBodyRigidbody[1].velocity.magnitude <= 0.5f)
+            {
+                checkTheMovement = false;
+
+                if (CameraManager.Instance) CameraManager.Instance.ActivateTurnCamera();
+
+                if (GameManager.instance) StartCoroutine(GameManager.instance.LevelComplete());
+
+                Debug.LogError("Sorry, He Is No More RIP -_-");
+            }
+        }
     }
 
     private Vector3 _currentPosition;

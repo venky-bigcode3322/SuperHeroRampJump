@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
+using System.Collections;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -48,5 +48,12 @@ public class GameManager : MonoBehaviour
         obj.transform.localPosition = initTransform.localPosition;
 
         return obj.GetComponent<CharacterController>();
+    }
+
+    public IEnumerator LevelComplete()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (UiHandler.Instance) UiHandler.Instance.ShowPopup(AllPages.Ingame, AllPages.FinishPage);
     }
 }
