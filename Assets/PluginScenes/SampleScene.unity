@@ -747,7 +747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InAppProducts: []
   DiscountProducts: []
-  Base64Key: 
+  Base64Key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu9bfeFjYqTmOzkYOx5R0NXwAXn7kg/3hMRI5qEyQEEf3xNOiJZZ2HR5C3oHOVPTHfqYpyc7F+jJqq+EcdqY4T/b+5EJE92SJlpkQVzbxM+8mArOqCy947TAhiFSu6aNFURsfNc06FoHNcKOJplusZixZlO9JWVBCXTq3qfYiFjM8KTWtzUQwEz9MOVQV0zdXvwNVke93sOEzXmCa3/Qw9T3qv1/yl4m9IdMbNUtb2pD46Yc0Nn+MGD7MJKm7YwqetTNlRxu4B+yzt5ksE2wtKvuL5bN4wjbrFSDjAWk60fJ7i/9i7K79wOtbyjO2gW+fjYlH7fFNkgq2YLzcC3avUQIDAQAB
   isIntialized: 0
   isAnyOneSubscribed: 0
 --- !u!114 &857069856
@@ -774,7 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2afa23157f982b49afa747105f5516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  APIKey: 
 --- !u!114 &857069858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,8 +786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e267aeb11c3a7a74984d21f294c22f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdID: 1388189
-  isIntialized: 0
 --- !u!114 &857069859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,8 +874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59094d32be8f7e478b05e8520395027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  App_ID: 
-  isInitialized: 0
 --- !u!114 &857069864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,11 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfca4d97e8f92f54797438dbf541b85a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isIntialized: 0
-  appID: 
-  InterstitialAdID: 
-  rewardedVideoAdID: 
-  BannerAdId: 
 --- !u!114 &857069865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,8 +975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451f92547b535124fade922fa57637f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CommonDataURL: 
-  BaseDataURL: 
+  CommonDataURL: https://bigcode.s3.us-west-2.amazonaws.com/NewBase/ramp.json
+  BaseDataURL: https://mtsgames.s3.us-west-2.amazonaws.com/jsonDtouch/superherorampjump.json
   isPotraitGame: 1
   NextScene: 
   toastPopUp: {fileID: 1423409136}
@@ -1074,8 +1064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ed9b7e837558e24d9ac306d75c1ee4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interstitial_placement_id: 
-  rewarded_placement_id: 
 --- !u!114 &857069873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1088,7 +1076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cba2d1ccb439ac47b20248ea711ec2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AppToken: 
 --- !u!114 &857069874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,11 +1101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed664d20a2e0bb642ac524f252333ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RewardedVideoPlacementID: 
-  SkippableAdPlacementID: 
-  isInitialized: 0
-  appID: 
-  InterstialIsLoaded: 0
 --- !u!114 &857069876
 MonoBehaviour:
   m_ObjectHideFlags: 0
