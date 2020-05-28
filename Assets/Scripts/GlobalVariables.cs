@@ -22,6 +22,20 @@ public class GlobalVariables : MonoBehaviour
 
     public static event DiamondsUpdate DiamondUpdateEvent;
 
+    private static string[] BikeKeys = new string[] { "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "b11", "b12" };
+
+    public static bool CheckBikeUnlockedStatus(int index)
+    {
+        if (PlayerPrefs.GetInt(BikeKeys[0]) == 0) PlayerPrefs.SetInt(BikeKeys[0], 1);
+
+        return PlayerPrefs.GetInt(BikeKeys[index], 0) == 1 ? true : false;
+    }
+
+    public static void UnlockBike(int index)
+    {
+        if (PlayerPrefs.GetInt(BikeKeys[index]) != 1) PlayerPrefs.SetInt(BikeKeys[index], 1);
+    }
+
     public static void ResetScoreValues()
     {
         LevelReward = BonusReward = 0;
@@ -68,6 +82,12 @@ public class GlobalVariables : MonoBehaviour
     {
         get => PlayerPrefs.GetInt("UpgradeLevelPrice", 1000);
         set => PlayerPrefs.SetInt("UpgradeLevelPrice", value);
+    }
+
+    public static int CollectedKeys
+    {
+        get => PlayerPrefs.GetInt("CollectedKeys", 0);
+        set => PlayerPrefs.SetInt("CollectedKeys", value);
     }
 
     public static void AddCoins(int amount)

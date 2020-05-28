@@ -7,15 +7,17 @@
         Ingame = 2,
         BikeSelection = 3,
         CharacterSelection = 4,
-        FinishPage = 5
+        FinishPage = 5,
+        ChestBoxPage = 6,
+        LevelUpPage = 7
     }
 
-    public enum VehicleUnlockType
+    public enum BikeUnlockType
     {
         Coins,
-        CoinsAndInApp,
-        InApp,
-        UnlockThrough
+        Diamonds,
+        DailyBonus,
+        InApp
     }
 
     public enum MusicBG
