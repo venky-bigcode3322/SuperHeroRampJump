@@ -9,7 +9,6 @@ public class MenuPage : PopupBase
     [SerializeField] Text FuelUpgradePriceText;
 
     [SerializeField] Text CoinsText;
-
     [SerializeField] Text DiamondsText;
 
     public override void Open()
@@ -49,7 +48,7 @@ public class MenuPage : PopupBase
 
     public void DiamondsButton()
     {
-
+        //
     }
 
     public void FuelUpgradeButton()

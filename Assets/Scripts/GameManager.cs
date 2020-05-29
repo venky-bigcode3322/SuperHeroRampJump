@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public ObjectPooling DustParticlePool;
 
+    private GameObject currentBike;
+
     private void Awake()
     {
         instance = this;
@@ -46,9 +48,20 @@ public class GameManager : MonoBehaviour
 
     private void InstantiateBike()
     {
-        var obj = Instantiate(bikes[0]) as GameObject;
+        var obj = Instantiate(bikes[GlobalVariables.selectedBike]) as GameObject;
         obj.transform.position = spawnPoint.position;
         if (CameraManager.Instance) CameraManager.Instance.target = obj.transform;
+        currentBike = obj;
+    }
+
+    public void InstantiateBikeAgain()
+    {
+        if(currentBike != null) Destroy(currentBike);
+
+        var obj = Instantiate(bikes[GlobalVariables.selectedBike]) as GameObject;
+        obj.transform.position = spawnPoint.position;
+        if (CameraManager.Instance) CameraManager.Instance.target = obj.transform;
+        currentBike = obj;
     }
 
     public CharacterController InstantiateSuperHero(Transform initTransform)

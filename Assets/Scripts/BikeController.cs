@@ -58,8 +58,21 @@ public class BikeController : MonoBehaviour
         _boydCollider2D = GetComponent<BoxCollider2D>();
     }
 
+    private void OnDestroy()
+    {
+        instance = null;
+    }
+
     private void Start()
     {
+        ActivateSuperHeroCharacter();
+    }
+
+    public void ActivateSuperHeroCharacter()
+    {
+        if (characterController != null)
+            Destroy(characterController.gameObject);
+
         characterController = GameManager.instance.InstantiateSuperHero(characterPose);
         characterController.SetDriverPose(driverPoseIndex);
         currentBikeState = BikeControlStates.InitState;

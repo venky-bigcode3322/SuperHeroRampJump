@@ -5,7 +5,7 @@ using System.IO;
 public class PlayerPrefsDelete : EditorWindow
 {
 
-	[MenuItem ("BigCode/PlayerPrefs/Delete")]
+	[MenuItem ("BigCode/PlayerPrefs/Delete %q")]
 	public static void DeletePrefs ()
 	{
         if (EditorUtility.DisplayDialog("BigCode", "Are you sure? Do you wanna delete playerprefs", "Yes","No"))

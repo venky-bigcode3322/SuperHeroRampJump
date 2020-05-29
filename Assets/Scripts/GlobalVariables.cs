@@ -23,6 +23,7 @@ public class GlobalVariables : MonoBehaviour
     public static event DiamondsUpdate DiamondUpdateEvent;
 
     private static string[] BikeKeys = new string[] { "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "b11", "b12" };
+    private static string[] BikeTimerKeys = new string[] { "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12" };
 
     public static bool CheckBikeUnlockedStatus(int index)
     {
@@ -42,10 +43,32 @@ public class GlobalVariables : MonoBehaviour
         AirTime = 0;
     }
 
+    public static string GetTimerValue(int index)
+    {
+        return PlayerPrefs.GetString(BikeTimerKeys[index],string.Empty);
+    }
+
+    public static void  SetTimerValue(int index,string _value)
+    {
+        PlayerPrefs.SetString(BikeTimerKeys[index], _value);
+    }
+
     public static int selectedCharacter
     {
         get => PlayerPrefs.GetInt("SelectedCharacter",0);
         set => PlayerPrefs.SetInt("SelectedCharacter", value);
+    }
+
+    public static int unlockedCharacters
+    {
+        get => PlayerPrefs.GetInt("unlockedCharacters", 2);
+        set => PlayerPrefs.SetInt("unlockedCharacters", value);
+    }
+
+    public static int selectedBike
+    {
+        get => PlayerPrefs.GetInt("selectedBike", 0);
+        set => PlayerPrefs.SetInt("selectedBike", value);
     }
 
     public static bool MusicState
@@ -111,7 +134,7 @@ public class GlobalVariables : MonoBehaviour
         GameDiamonds += amount;
 
         if (DiamondUpdateEvent != null)
-            DiamondUpdateEvent(GameCoins);
+            DiamondUpdateEvent(GameDiamonds);
     }
 
     public static void DeductDiamonds(int amount)
@@ -119,6 +142,6 @@ public class GlobalVariables : MonoBehaviour
         GameDiamonds -= amount;
 
         if (DiamondUpdateEvent != null)
-            DiamondUpdateEvent(GameCoins);
+            DiamondUpdateEvent(GameDiamonds);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,15 +25,18 @@ public class BikeSelectionPage : PopupBase
 
     public override bool IsActive => gameObject.activeSelf;
 
-    [SerializeField] Button[] BikeTypeButtons;
-
-    [SerializeField] Sprite[] ActiveInactiveButtonSprite; // 0- Inactive :: 1- Active 
-
-    [SerializeField] GameObject[] BikeTypeScrollViews;
-
     [SerializeField] BikeProperties[] AllbikeProperties;
 
+    [SerializeField] GameObject[] AllBikeModels;
+
+    private float[] timerValues = new float[12];
+    private bool[] timerRun = new bool[12];
+
     private int[] BikePrices = new int[] { 0, 1000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000 };
+    private int[] BikeTimerValues = new int[] { 0, 0, 1, 7, 0, 0, 0, 0, 0, 21, 0, 0 };
+
+    [SerializeField] Text CoinsText;
+    [SerializeField] Text DiamondsText;
 
     public override void Open()
     {
@@ -47,25 +50,52 @@ public class BikeSelectionPage : PopupBase
 
     private void OnEnable()
     {
+        GlobalVariables.CoinsUpdateEvent += UpdateCoins;
+        GlobalVariables.DiamondUpdateEvent += UpdateDiamonds;
+
+        UpdateCoins(GlobalVariables.GameCoins);
+        UpdateDiamonds(GlobalVariables.GameDiamonds);
+
+        SetDefualtUnlockTimerValues();
         CheckBikeUnlockStatus();
+    }
+
+    private void OnDisable()
+    {
+        GlobalVariables.CoinsUpdateEvent -= UpdateCoins;
+        GlobalVariables.DiamondUpdateEvent -= UpdateDiamonds;
+    }
+
+    private DateTime previosTime;
+
+    private void SetDefualtUnlockTimerValues()
+    {
+        for (int i = 0; i < BikeTimerValues.Length; i++)
+        {
+            if(GlobalVariables.GetTimerValue(i) == string.Empty)
+            {
+                previosTime = DateTime.Now;
+                previosTime = previosTime.AddDays(BikeTimerValues[i]);
+                GlobalVariables.SetTimerValue(i,previosTime.ToString());
+            }
+        }
     }
 
     private int currentBikeType = 0;
 
-    public void SelectCurrentBikeType(int index)
+    public void SelectedBikeModel(int index)
     {
-        if (currentBikeType == index)
-            return;
-
-        BikeTypeButtons[currentBikeType].image.sprite = ActiveInactiveButtonSprite[0];
-        BikeTypeScrollViews[currentBikeType].SetActive(false);
-        BikeTypeButtons[index].image.sprite = ActiveInactiveButtonSprite[1];
-        BikeTypeScrollViews[index].SetActive(true);
+        AllBikeModels[currentBikeType].SetActive(false);
         currentBikeType = index;
+        AllBikeModels[currentBikeType].SetActive(true);
     }
+
+    private TimeSpan tp;
+    private List<int> CurrentTimerIndex = new List<int>();
 
     public void CheckBikeUnlockStatus()
     {
+        CurrentTimerIndex.Clear();
         for (int i = 0; i < AllbikeProperties.Length; i++)
         {
             AllbikeProperties[i].SelectButton.SetActive(false);
@@ -87,6 +117,20 @@ public class BikeSelectionPage : PopupBase
                         break;
                     case BikeUnlockType.DailyBonus:
                         AllbikeProperties[i].TimerObject.SetActive(true);
+
+                        previosTime = DateTime.Parse(GlobalVariables.GetTimerValue(i));
+                        timerValues[i] = (float)(previosTime - DateTime.Now).TotalSeconds;
+                        tp = TimeSpan.FromSeconds(timerValues[i]);
+                        if(tp.TotalHours > 24)
+                        {
+                            AllbikeProperties[i].TimerText.text = tp.Days + "Days";
+                        }
+                        else
+                        {
+                            timerRun[i] = true;
+                            CurrentTimerIndex.Add(i);
+                        }
+
                         break;
                     case BikeUnlockType.Diamonds:
                         AllbikeProperties[i].DiamondsBuyButton.SetActive(true);
@@ -107,12 +151,28 @@ public class BikeSelectionPage : PopupBase
 
     public void CoinsBuyButton(int index)
     {
-
+        if(GlobalVariables.GameCoins >= BikePrices[index])
+        {
+            GlobalVariables.DeductCoins(BikePrices[index]);
+            GlobalVariables.UnlockBike(index);
+        }
+        else
+        {
+            Debug.Log("InSufficient Coins");
+        }
     }
 
     public void DiamondsBuyButton(int index)
     {
-
+        if (GlobalVariables.GameDiamonds >= BikePrices[index])
+        {
+            GlobalVariables.DeductDiamonds(BikePrices[index]);
+            GlobalVariables.UnlockBike(index);
+        }
+        else
+        {
+            Debug.Log("InSufficient Diamonds");
+        }
     }
 
     public void InAppBuyButton(int index)
@@ -122,7 +182,9 @@ public class BikeSelectionPage : PopupBase
 
     public void SelectBikeButton(int index)
     {
-
+        GlobalVariables.selectedBike = index;
+        if (GameManager.instance) GameManager.instance.InstantiateBikeAgain();
+        BackButton();
     }
 
     public void WatchVideoToGet50Diamonds()
@@ -133,5 +195,38 @@ public class BikeSelectionPage : PopupBase
     public void PurchaseDiamonds()
     {
 
+    }
+
+    void UpdateCoins(int coins)
+    {
+        CoinsText.text = coins.ToString();
+    }
+
+    void UpdateDiamonds(int diamonds)
+    {
+        DiamondsText.text = diamonds.ToString();
+    }
+
+    private TimeSpan _tp;
+    private void Update()
+    {
+        if(CurrentTimerIndex.Count > 0)
+        {
+            for (int i = 0; i < CurrentTimerIndex.Count; i++)
+            {
+                if (timerRun[CurrentTimerIndex[i]])
+                {
+                    timerValues[CurrentTimerIndex[i]] -= Time.deltaTime;
+                    if(timerValues[CurrentTimerIndex[i]] <= 0)
+                    {
+                        timerRun[CurrentTimerIndex[i]] = false;
+                        GlobalVariables.UnlockBike(CurrentTimerIndex[i]);
+                        CheckBikeUnlockStatus();
+                    }
+                    _tp = TimeSpan.FromSeconds(timerValues[CurrentTimerIndex[i]]);
+                    AllbikeProperties[CurrentTimerIndex[i]].TimerText.text = string.Format("{0:00}:{1:00}:{2:00}", _tp.Hours, _tp.Minutes, _tp.Seconds);
+                }
+            }
+        }
     }
 }
