@@ -97,6 +97,15 @@ public class CharacterController : MonoBehaviour
             {
                 checkTheMovement = false;
 
+                var distance = Mathf.RoundToInt(CalculateDistance);
+
+                GlobalVariables.CurrentJumpingDistance = distance;
+
+                if (distance > GlobalVariables.BestScore)
+                    GlobalVariables.BestScore = distance;
+
+                GlobalVariables.DistanceReward = distance;
+
                 if (CameraManager.Instance) CameraManager.Instance.ActivateTurnCamera();
 
                 if (GameManager.instance) StartCoroutine(GameManager.instance.LevelComplete());

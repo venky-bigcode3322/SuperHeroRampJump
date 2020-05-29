@@ -20,10 +20,13 @@ public class FinishPage : PopupBase
         gameObject.SetActive(false);
     }
 
-    [SerializeField] Text LevelRewardText;
+    [SerializeField] Text DistanceText;
+
+    [SerializeField] Text DistanceRewardText;
     [SerializeField] Text BonusRewardText;
     [SerializeField] Text AirTimeBonusText;
     [SerializeField] Text TotalText;
+    [SerializeField] Text TripleRewardTotalText;
 
     [SerializeField] GameObject ContinueButton;
 
@@ -33,8 +36,27 @@ public class FinishPage : PopupBase
         DisplayScores();
     }
 
+    float currentTotalScore = 0;
+
     void DisplayScores()
     {
+        currentTotalScore = 0;
+
+        DistanceText.text = GlobalVariables.CurrentJumpingDistance+"m";
+
+        DistanceRewardText.text = GlobalVariables.DistanceReward.ToString();
+
+        BonusRewardText.text = GlobalVariables.BonusReward.ToString();
+
+        AirTimeBonusText.text = GlobalVariables.AirTime.ToString();
+
+        currentTotalScore += GlobalVariables.DistanceReward + GlobalVariables.AirTime + GlobalVariables.BonusReward;
+
+        TotalText.text = currentTotalScore.ToString();
+        TripleRewardTotalText.text = (currentTotalScore * 3).ToString();
+
+        GlobalVariables.GameCoins += Mathf.RoundToInt(currentTotalScore);
+
         Invoke("EnableNextButton",3);
     }
 
@@ -48,5 +70,15 @@ public class FinishPage : PopupBase
     {
         GlobalVariables.NextSceneToLoad = SceneNames.GameScene;
         SceneManager.LoadScene(SceneNames.Loading);
+    }
+
+    public void TripperRewardButton()
+    {
+
+    }
+
+    public void TrippleRewardSuccess()
+    {
+        GlobalVariables.GameCoins += Mathf.RoundToInt(currentTotalScore * 3);
     }
 }

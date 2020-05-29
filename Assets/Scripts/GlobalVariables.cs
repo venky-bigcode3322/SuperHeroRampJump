@@ -8,7 +8,9 @@ public class GlobalVariables : MonoBehaviour
 
     public static float FuelPercentage = 21;
 
-    public static float LevelReward;
+    public static int CurrentJumpingDistance;
+
+    public static float DistanceReward;
 
     public static int BonusReward;
 
@@ -39,7 +41,7 @@ public class GlobalVariables : MonoBehaviour
 
     public static void ResetScoreValues()
     {
-        LevelReward = BonusReward = 0;
+        DistanceReward = BonusReward = 0;
         AirTime = 0;
     }
 
@@ -63,6 +65,12 @@ public class GlobalVariables : MonoBehaviour
     {
         get => PlayerPrefs.GetInt("unlockedCharacters", 2);
         set => PlayerPrefs.SetInt("unlockedCharacters", value);
+    }
+
+    public static int BestScore
+    {
+        get => PlayerPrefs.GetInt("BestScore", 0);
+        set => PlayerPrefs.SetInt("BestScore", value);
     }
 
     public static int selectedBike

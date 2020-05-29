@@ -11,6 +11,8 @@ public class MenuPage : PopupBase
     [SerializeField] Text CoinsText;
     [SerializeField] Text DiamondsText;
 
+    [SerializeField] Text BestScoreText;
+
     public override void Open()
     {
         gameObject.SetActive(true);
@@ -37,6 +39,12 @@ public class MenuPage : PopupBase
         UpdateCoins(GlobalVariables.GameCoins);
         UpdateDiamonds(GlobalVariables.GameDiamonds);
         CheckFuelUpgradeHud();
+        GetBestScore();
+    }
+
+    void GetBestScore()
+    {
+        BestScoreText.text = GlobalVariables.BestScore + " Mtrs";
     }
 
     private void OnDisable()
@@ -48,7 +56,7 @@ public class MenuPage : PopupBase
 
     public void DiamondsButton()
     {
-        //
+
     }
 
     public void FuelUpgradeButton()
