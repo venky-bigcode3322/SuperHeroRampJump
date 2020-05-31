@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get;private set; }
 
-    [SerializeField] Slider fuelBar;
+    [SerializeField] Image fuelBar;
 
     public GameObject[] superHeroCharacters;
 
@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
-        _initialBarPercentage = GlobalVariables.FuelPercentage;
-
         DustParticlePool = new ObjectPooling();
         DustParticlePool.InitializePool(DustParticle);
     }
@@ -43,7 +41,13 @@ public class GameManager : MonoBehaviour
 
     public void CheckFuelHud()
     {
-        fuelBar.value = GlobalVariables.FuelPercentage / _initialBarPercentage;
+        fuelBar.fillAmount = GlobalVariables.FuelPercentage / _initialBarPercentage;
+    }
+
+    public void SetFuelforGame(float Value)
+    {
+        GlobalVariables.FuelPercentage = Value;
+        _initialBarPercentage = GlobalVariables.FuelPercentage;
     }
 
     private void InstantiateBike()
@@ -77,6 +81,13 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        if (UiHandler.Instance) UiHandler.Instance.ShowPopup(AllPages.Ingame, AllPages.FinishPage);
+        if (GlobalVariables.CurrentJumpingDistance >= (GlobalVariables.GameLevel * 1000))
+        {
+            if (UiHandler.Instance) UiHandler.Instance.ShowPopup(AllPages.Ingame, AllPages.LevelUpPage);
+        }
+        else
+        {
+            if (UiHandler.Instance) UiHandler.Instance.ShowPopup(AllPages.Ingame, AllPages.FinishPage);
+        }
     }
 }

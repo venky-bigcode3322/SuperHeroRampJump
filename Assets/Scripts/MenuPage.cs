@@ -13,6 +13,18 @@ public class MenuPage : PopupBase
 
     [SerializeField] Text BestScoreText;
 
+    [SerializeField] GameObject[] AllButtons;
+
+    private Vector3[] DefaultButtonPositions;
+
+    private void Awake()
+    {
+        DefaultButtonPositions = new Vector3[AllButtons.Length];
+
+        for (int i = 0; i < DefaultButtonPositions.Length; i++)
+            DefaultButtonPositions[i] = AllButtons[i].transform.localPosition;
+    }
+
     public override void Open()
     {
         gameObject.SetActive(true);
@@ -40,6 +52,8 @@ public class MenuPage : PopupBase
         UpdateDiamonds(GlobalVariables.GameDiamonds);
         CheckFuelUpgradeHud();
         GetBestScore();
+
+        StartCoroutine(AnimatePage(0));
     }
 
     void GetBestScore()
@@ -95,8 +109,7 @@ public class MenuPage : PopupBase
     public void TapToContinue()
     {
         if (UiHandler.Instance) UiHandler.Instance.ShowPopup(CurrentPage, AllPages.Ingame);
-        GlobalVariables.FuelPercentage = 20 + (GlobalVariables.UpgradeLevel + 1);
-        Debug.LogError("FuelPercentage:: " + GlobalVariables.FuelPercentage);
+        GameManager.instance.SetFuelforGame(20 + (GlobalVariables.UpgradeLevel + 1));
     }
 
     void UpdateCoins(int coins)
@@ -107,5 +120,45 @@ public class MenuPage : PopupBase
     void UpdateDiamonds(int diamonds)
     {
         DiamondsText.text = diamonds.ToString();
+    }
+
+    private Vector3 dir = Vector3.zero;
+
+    IEnumerator AnimatePage(float waitTime)
+    {
+        for (int i = 0; i < AllButtons.Length; i++)
+            AllButtons[i].SetActive(false);
+
+        for (int i = 0; i < DefaultButtonPositions.Length; i++)
+            AllButtons[i].transform.localPosition = DefaultButtonPositions[i];
+
+        yield return new WaitForSeconds(waitTime);
+
+        for (int i = 0; i < AllButtons.Length; i++)
+        {
+            AllButtons[i].SetActive(true);
+            dir = AllButtons[i].transform.localPosition;
+
+            if (i < 3)
+            {
+                dir.y = -1000;
+            }
+            else if(i > 2 && i < 5)
+            {
+                dir.x = -1000;
+            }
+            else if (i % 2 == 0)
+            {
+                dir.x = -1000;
+            }
+            else
+            {
+                dir.x = 1000;
+            }
+
+            iTween.MoveFrom(AllButtons[i], iTween.Hash("position", dir, "time", 0.75f, "isLocal", true, "easeType", iTween.EaseType.easeOutBack));
+
+            yield return new WaitForSeconds(0.15f);
+        }
     }
 }

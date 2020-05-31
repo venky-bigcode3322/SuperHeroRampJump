@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -68,8 +69,9 @@ public class FinishPage : PopupBase
 
     public void Continue()
     {
-        GlobalVariables.NextSceneToLoad = SceneNames.GameScene;
-        SceneManager.LoadScene(SceneNames.Loading);
+        if (UiHandler.Instance) UiHandler.Instance.ShowPopup(CurrentPage, AllPages.UnlockProgressPage);
+        //GlobalVariables.NextSceneToLoad = SceneNames.GameScene;
+        //SceneManager.LoadScene(SceneNames.Loading);
     }
 
     public void TripperRewardButton()

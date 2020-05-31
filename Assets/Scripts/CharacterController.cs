@@ -23,8 +23,11 @@ public class CharacterController : MonoBehaviour
 
     private AirTimeDetector AirTimeDetector;
 
+
     private void Awake()
     {
+
+
         foreach (var item in GetComponentsInChildren<Rigidbody>())
         {
             AllBodyRigidbody.Add(item);
@@ -111,6 +114,8 @@ public class CharacterController : MonoBehaviour
                 if (GameManager.instance) StartCoroutine(GameManager.instance.LevelComplete());
 
                 Debug.LogError("Sorry, He Is No More RIP -_-");
+                IsDead = true;
+                AirTimeDetector.isDead = IsDead;
             }
         }
     }

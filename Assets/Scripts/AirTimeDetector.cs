@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class AirTimeDetector : MonoBehaviour
 {
+    public bool isDead = false;
+
     public bool isGrounded = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.gameObject.layer != LayerMask.NameToLayer("Bike"))
+        if(collision.collider.gameObject.layer != LayerMask.NameToLayer("Bike") && !isDead)
         {   
             GameObject obj = GameManager.instance.DustParticlePool.ReleseReusable();
             obj.transform.position = transform.position;

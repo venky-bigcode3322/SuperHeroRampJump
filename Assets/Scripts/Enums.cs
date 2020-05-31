@@ -10,7 +10,8 @@
         FinishPage = 5,
         ChestBoxPage = 6,
         ChestBoxGiftPage = 7,
-        LevelUpPage = 8
+        LevelUpPage = 8,
+        UnlockProgressPage = 9
     }
 
     public enum BikeUnlockType

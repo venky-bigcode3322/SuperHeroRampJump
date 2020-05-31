@@ -121,6 +121,18 @@ public class GlobalVariables : MonoBehaviour
         set => PlayerPrefs.SetInt("CollectedKeys", value);
     }
 
+    public static int DistanceTarget
+    {
+        get => PlayerPrefs.GetInt("CurrentDistanceTarget", 0);
+        set => PlayerPrefs.SetInt("CurrentDistanceTarget", value);
+    }
+
+    public static int GameLevel
+    {
+        get => PlayerPrefs.GetInt("GameLevel", 1);
+        set => PlayerPrefs.SetInt("GameLevel", value);
+    }
+
     public static void AddCoins(int amount)
     {
         GameCoins += amount;
