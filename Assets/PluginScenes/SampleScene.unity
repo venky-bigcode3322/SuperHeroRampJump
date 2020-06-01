@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IntertistialID: be5d866a345a4557af2d70160c0fe0fb
   RewardedVideoID: 5a5c048c104c4cc1b7c666b8f521e6b9
-  bannerID: 
+  bannerID: ff9fbc8b63544391b7fa48a24f31d038
 --- !u!114 &857069878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ccd620abf648742836fca6aaf7e447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AppFlyersID: 
+  AppFlyersID: LrwMm8e4QuxPC2YxSAzJNn
 --- !u!1 &879408771
 GameObject:
   m_ObjectHideFlags: 0
