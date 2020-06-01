@@ -89,5 +89,7 @@ public class GameManager : MonoBehaviour
         {
             if (UiHandler.Instance) UiHandler.Instance.ShowPopup(AllPages.Ingame, AllPages.FinishPage);
         }
+
+        if (SoundManager.Instance) SoundManager.Instance.StartCoroutine(SoundManager.Instance.PlayBG(MusicBG.LevelClearFinishClip, false));
     }
 }

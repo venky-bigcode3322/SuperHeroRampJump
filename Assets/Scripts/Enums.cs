@@ -25,8 +25,7 @@
     {
         MenuBG = 0,
         PlayBG = 1,
-        FinsishClip = 2,
-        LevelClearFinishClip = 3
+        LevelClearFinishClip = 2
     }
 
     public enum ObstaclesTypes

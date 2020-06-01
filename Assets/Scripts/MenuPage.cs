@@ -54,6 +54,7 @@ public class MenuPage : PopupBase
         UpdateDiamonds(GlobalVariables.GameDiamonds);
         CheckFuelUpgradeHud();
         GetBestScore();
+        CheckBonusUpgrade();
 
         StartCoroutine(AnimatePage(0));
 
@@ -95,9 +96,25 @@ public class MenuPage : PopupBase
         FuelUpgradePriceText.text = GlobalVariables.UpgradeLevelPrice.ToString();
     }
 
+    [SerializeField] Text BonusText;
+    [SerializeField] Text BonusLevelText;
+
+    void CheckBonusUpgrade()
+    {
+        BonusText.text = GlobalVariables.OfflineEarningsLevelPrice.ToString();
+        BonusLevelText.text = "Level " + (GlobalVariables.OfflineEarningsLevel + 1);
+    }
+
     public void OfflineEarningsButton()
     {
-        
+        ButtonClickSound();
+        if (GlobalVariables.GameCoins >= GlobalVariables.OfflineEarningsLevelPrice)
+        {
+            GlobalVariables.DeductCoins(GlobalVariables.OfflineEarningsLevelPrice);
+            GlobalVariables.OfflineEarningsLevel += 1;
+            GlobalVariables.OfflineEarningsLevelPrice += 1000;
+        }
+        CheckBonusUpgrade();
     }
 
     public void CharactersButton()
@@ -119,6 +136,8 @@ public class MenuPage : PopupBase
     {
         if (UiHandler.Instance) UiHandler.Instance.ShowPopup(CurrentPage, AllPages.Ingame);
         GameManager.instance.SetFuelforGame(20 + (GlobalVariables.UpgradeLevel + 1));
+
+        SoundManager.Instance.StartCoroutine(SoundManager.Instance.PlayBG(MusicBG.PlayBG));
     }
 
     void UpdateCoins(int coins)
@@ -130,6 +149,8 @@ public class MenuPage : PopupBase
     {
         DiamondsText.text = diamonds.ToString();
     }
+
+
 
     private Vector3 dir = Vector3.zero;
 

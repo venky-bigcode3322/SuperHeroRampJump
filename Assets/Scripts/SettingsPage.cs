@@ -81,6 +81,8 @@ public class SettingsPage : PopupBase
             SoundImage.sprite = ButtonOnAndOffSprite[1];
             SoundText.text = "On";
         }
+
+        if (SoundManager.Instance) SoundManager.Instance.CheckMusicAndSoundStatus();
     }
 
     public void Back()

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2275545643599592794}
   - component: {fileID: 7399715718812430077}
   m_Layer: 8
-  m_Name: Bike_3
+  m_Name: Bike_12
   m_TagString: Bike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdf889cef7656564f82dcaeb4cfc7262, type: 2}
+  - {fileID: 2100000, guid: baac9dd9c994333478c7cee0065168da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -367,7 +367,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdf889cef7656564f82dcaeb4cfc7262, type: 2}
+  - {fileID: 2100000, guid: baac9dd9c994333478c7cee0065168da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -575,7 +575,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdf889cef7656564f82dcaeb4cfc7262, type: 2}
+  - {fileID: 2100000, guid: baac9dd9c994333478c7cee0065168da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -685,7 +685,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdf889cef7656564f82dcaeb4cfc7262, type: 2}
+  - {fileID: 2100000, guid: baac9dd9c994333478c7cee0065168da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

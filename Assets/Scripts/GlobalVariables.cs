@@ -133,6 +133,18 @@ public class GlobalVariables : MonoBehaviour
         set => PlayerPrefs.SetInt("GameLevel", value);
     }
 
+    public static int OfflineEarningsLevel
+    {
+        get => PlayerPrefs.GetInt("OfflineEarningsLevel", 1);
+        set => PlayerPrefs.SetInt("OfflineEarningsLevel", value);
+    }
+
+    public static int OfflineEarningsLevelPrice
+    {
+        get => PlayerPrefs.GetInt("OfflineEarningsLevelPrice", 1000);
+        set =>  PlayerPrefs.SetInt("OfflineEarningsLevelPrice", value);
+    }
+
     public static void AddCoins(int amount)
     {
         GameCoins += amount;
