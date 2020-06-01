@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,18 @@ public class BikeSelectionPage : PopupBase
     [SerializeField] Text CoinsText;
     [SerializeField] Text DiamondsText;
 
+    [SerializeField] GameObject[] AllButtons;
+
+    private Vector3[] DefaultButtonPositions;
+
+    private void Awake()
+    {
+        DefaultButtonPositions = new Vector3[AllButtons.Length];
+
+        for (int i = 0; i < DefaultButtonPositions.Length; i++)
+            DefaultButtonPositions[i] = AllButtons[i].transform.localPosition;
+    }
+
     public override void Open()
     {
         gameObject.SetActive(true);
@@ -58,6 +71,8 @@ public class BikeSelectionPage : PopupBase
 
         SetDefualtUnlockTimerValues();
         CheckBikeUnlockStatus();
+
+        StartCoroutine(AnimatePage(0));
     }
 
     private void OnDisable()
@@ -227,6 +242,47 @@ public class BikeSelectionPage : PopupBase
                     AllbikeProperties[CurrentTimerIndex[i]].TimerText.text = string.Format("{0:00}:{1:00}:{2:00}", _tp.Hours, _tp.Minutes, _tp.Seconds);
                 }
             }
+        }
+    }
+
+   // private Vector3 dir = Vector3.zero;
+
+    IEnumerator AnimatePage(float waitTime)
+    {
+        for (int i = 0; i < AllButtons.Length; i++)
+            AllButtons[i].SetActive(false);
+
+        for (int i = 0; i < DefaultButtonPositions.Length; i++)
+            AllButtons[i].transform.localPosition = DefaultButtonPositions[i];
+
+        yield return new WaitForSeconds(waitTime);
+
+        for (int i = 0; i < AllButtons.Length; i++)
+        {
+            AllButtons[i].SetActive(true);
+            //dir = AllButtons[i].transform.localPosition;
+
+            //if (i < 3)
+            //{
+            //    dir.y = -1000;
+            //}
+            //else if (i > 2 && i < 5)
+            //{
+            //    dir.x = -1000;
+            //}
+            //else if (i % 2 == 0)
+            //{
+            //    dir.x = 1000;
+            //}
+            //else
+            //{
+            //    dir.x = -1000;
+            //}
+
+            iTween.ScaleFrom(AllButtons[i], iTween.Hash("Scale", Vector3.zero, "time", 0.65f, "isLocal", true, "easeType", iTween.EaseType.easeOutBack));
+            iTween.RotateFrom(AllButtons[i], iTween.Hash("z", 45, "time", 0.65f, "isLocal", true, "easeType", iTween.EaseType.easeOutBack));
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

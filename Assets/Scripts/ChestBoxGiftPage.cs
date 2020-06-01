@@ -1,25 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class ChestBoxGiftPage : PopupBase
+public class ChestBoxGiftPage : MonoBehaviour
 {
-    public override AllPages CurrentPage => AllPages.ChestBoxGiftPage;
+    [SerializeField] Image giftIcon;
 
-    public override bool IsActive => gameObject.activeSelf;
+    [SerializeField] Text giftAmount;
 
-    public override void Open()
+    [SerializeField] Sprite[] giftIconSprites;//1 - coins 0 - diamonds
+
+    public void Open()
     {
         gameObject.SetActive(true);
     }
 
-    public override void Close()
+    public void Close()
     {
         gameObject.SetActive(false);
     }
 
-    public void Back()
+    public void SetDetails(int iconIndex,int Amount)
     {
-        if (UiHandler.Instance) UiHandler.Instance.CheckAndClosePopup();
+        giftIcon.sprite = giftIconSprites[iconIndex];
+
+        if(iconIndex == 0)
+            giftAmount.text = "x" + Amount + " Diamonds";
+        else
+            giftAmount.text = "x" + Amount + " Coins";
+
+        Open();
+    }
+
+    public void Claim()
+    {
+        Close();
     }
 }

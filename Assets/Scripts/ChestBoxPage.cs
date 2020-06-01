@@ -14,6 +14,7 @@ public class ChestBoxPage : PopupBase
         public Image Icon;
         public Text QuantityText;
         public int Quanitity;
+        public int GiftIndex;
     }
 
     public override AllPages CurrentPage => AllPages.ChestBoxPage;
@@ -27,6 +28,8 @@ public class ChestBoxPage : PopupBase
     [SerializeField] Sprite[] KeyActiveInactiveImage; // 0=InActive , 1=Active
 
     [SerializeField] ChestBoxProperty[] ChestBoxProperties;
+
+    [SerializeField] ChestBoxGiftPage ChestBoxGiftPage;
 
     public override void Open()
     {
@@ -67,6 +70,7 @@ public class ChestBoxPage : PopupBase
             {
                 ChestBoxProperties[i].Quanitity = Random.Range(50, 250);
             }
+            ChestBoxProperties[i].GiftIndex = randomeNumber;
             ChestBoxProperties[i].QuantityText.text = "x"+ChestBoxProperties[i].Quanitity;
         }
     }
@@ -93,7 +97,7 @@ public class ChestBoxPage : PopupBase
             GlobalVariables.CollectedKeys -= 1;
             ChestBoxProperties[index].ChestBoxUnLocked.SetActive(true);
             ChestBoxProperties[index].ChestBoxLocked.SetActive(false);
-            if (index == 0)
+            if (ChestBoxProperties[index].GiftIndex == 0)
             {
                 GlobalVariables.AddDiamonds(ChestBoxProperties[index].Quanitity);
             }
@@ -101,7 +105,9 @@ public class ChestBoxPage : PopupBase
             {
                 GlobalVariables.AddCoins(ChestBoxProperties[index].Quanitity);
             }
+
             showKeys();
+            ChestBoxGiftPage.SetDetails(ChestBoxProperties[index].GiftIndex, ChestBoxProperties[index].Quanitity);
         }
     }
 }

@@ -17,6 +17,8 @@ public class MenuPage : PopupBase
 
     private Vector3[] DefaultButtonPositions;
 
+    [SerializeField] DailyBonusPage DailyBonusPage;
+
     private void Awake()
     {
         DefaultButtonPositions = new Vector3[AllButtons.Length];
@@ -54,6 +56,13 @@ public class MenuPage : PopupBase
         GetBestScore();
 
         StartCoroutine(AnimatePage(0));
+
+        Invoke("CheckDailyBonus",2);
+    }
+
+    void CheckDailyBonus()
+    {
+        DailyBonusPage.CheckDailyBonus();
     }
 
     void GetBestScore()
@@ -149,11 +158,11 @@ public class MenuPage : PopupBase
             }
             else if (i % 2 == 0)
             {
-                dir.x = -1000;
+                dir.x = 1000;
             }
             else
             {
-                dir.x = 1000;
+                dir.x = -1000;
             }
 
             iTween.MoveFrom(AllButtons[i], iTween.Hash("position", dir, "time", 0.75f, "isLocal", true, "easeType", iTween.EaseType.easeOutBack));

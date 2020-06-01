@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class KeyGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject KeyObject;
+
+    private void Start()
     {
-        
+        GenerateKey(Vector3.zero);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GenerateKey(Vector3 Position)
     {
-        
+        GameObject obj = Instantiate(KeyObject) as GameObject;
+        Position.y = Random.Range(40,50);
+        Position.z = 0;
+        obj.transform.position = Position;
     }
 }
