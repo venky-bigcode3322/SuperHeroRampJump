@@ -10,6 +10,7 @@ public class BikeController : MonoBehaviour
 
     public enum BikeControlStates
     {
+        None,
         InitState,
         StartMovingState,
         CanTapForBoostState,
@@ -75,14 +76,14 @@ public class BikeController : MonoBehaviour
 
         characterController = GameManager.instance.InstantiateSuperHero(characterPose);
         characterController.SetDriverPose(driverPoseIndex);
-        currentBikeState = BikeControlStates.InitState;
+        currentBikeState = BikeControlStates.None;
     }
 
     private bool _isCharacterReleased = false;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && currentBikeState != BikeControlStates.None)
         {
             if(currentBikeState == BikeControlStates.InitState)
             {

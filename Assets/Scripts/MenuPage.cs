@@ -145,6 +145,8 @@ public class MenuPage : PopupBase
         if (UiHandler.Instance) UiHandler.Instance.ShowPopup(CurrentPage, AllPages.Ingame);
         GameManager.instance.SetFuelforGame(20 + (GlobalVariables.UpgradeLevel + 1));
 
+        if (BikeController.instance) BikeController.instance.currentBikeState = BikeController.BikeControlStates.InitState;
+
         SoundManager.Instance.StartCoroutine(SoundManager.Instance.PlayBG(MusicBG.PlayBG));
     }
 

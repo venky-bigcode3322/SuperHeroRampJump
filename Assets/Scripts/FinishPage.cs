@@ -61,6 +61,8 @@ public class FinishPage : PopupBase
         GlobalVariables.GameCoins += Mathf.RoundToInt(currentTotalScore);
 
         Invoke("EnableNextButton",3);
+
+        if (PluginManager.Instance) PluginManager.Instance.ShowLevelCompletedInterstitialAd();
     }
 
     void EnableNextButton()

@@ -93,13 +93,13 @@ public class GlobalVariables : MonoBehaviour
 
     public static int GameCoins
     {
-        get => PlayerPrefs.GetInt("GameCoins", 0);
+        get => PlayerPrefs.GetInt("GameCoins", 25000);
         set => PlayerPrefs.SetInt("GameCoins",value);
     }
 
     public static int GameDiamonds
     {
-        get => PlayerPrefs.GetInt("GameDiamonds", 0);
+        get => PlayerPrefs.GetInt("GameDiamonds", 25000);
         set => PlayerPrefs.SetInt("GameDiamonds", value);
     }
 
