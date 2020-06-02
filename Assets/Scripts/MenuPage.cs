@@ -80,14 +80,22 @@ public class MenuPage : PopupBase
 
     public void DiamondsButton()
     {
-
+        if(GlobalVariables.GameCoins >= 1500)
+        {
+            GlobalVariables.DeductCoins(1500);
+            GlobalVariables.AddDiamonds(50);
+        }
     }
 
     public void FuelUpgradeButton()
     {
-        GlobalVariables.UpgradeLevel += 1;
-        GlobalVariables.UpgradeLevelPrice += 1000;
-        CheckFuelUpgradeHud();
+        if (GlobalVariables.GameCoins >= GlobalVariables.UpgradeLevelPrice)
+        {
+            GlobalVariables.DeductCoins(GlobalVariables.UpgradeLevelPrice);
+            GlobalVariables.UpgradeLevel += 1;
+            GlobalVariables.UpgradeLevelPrice += 1000;
+            CheckFuelUpgradeHud();
+        }
     }
 
     void CheckFuelUpgradeHud()

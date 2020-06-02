@@ -72,7 +72,7 @@ public class Dummy_MenuPageHandler : MonoBehaviour {
 
         LoginHandler.Instance.SignOut();
 
-        PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.DoubleReward);
+        PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.TrippleReward);
 
     }
 }

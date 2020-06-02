@@ -25,7 +25,7 @@ public class CheckList : MonoBehaviour {
 
         //To Show Rewarded Video
         //Rewarded Video Callback you will observe in (BridgeManager_Bigcode.Instance.MainThreadOnRewardedFinished) method 
-        PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.DoubleReward);
+        PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.TrippleReward);
 
         //Facebook Login with out share
         //PluginManager.Instance.FacebookLogin(FacebookHandler_BigCode.SignIn.NONE);

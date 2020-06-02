@@ -15,6 +15,7 @@ public class KeyGenerator : MonoBehaviour
     public void GenerateKey(Vector3 Position)
     {
         GameObject obj = Instantiate(KeyObject) as GameObject;
+        Position.x = Random.Range(250,650);
         Position.y = Random.Range(40,50);
         Position.z = 0;
         obj.transform.position = Position;

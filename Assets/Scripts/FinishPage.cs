@@ -31,6 +31,8 @@ public class FinishPage : PopupBase
 
     [SerializeField] GameObject ContinueButton;
 
+    [SerializeField] Button TripleRewardButton;
+
     private void OnEnable()
     {
         ContinueButton.SetActive(false);
@@ -76,11 +78,12 @@ public class FinishPage : PopupBase
 
     public void TripperRewardButton()
     {
-
+        if (PluginManager.Instance) PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.TrippleReward);
     }
 
     public void TrippleRewardSuccess()
     {
         GlobalVariables.GameCoins += Mathf.RoundToInt(currentTotalScore * 3);
+        TripleRewardButton.interactable = false;
     }
 }

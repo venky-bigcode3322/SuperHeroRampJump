@@ -37,6 +37,8 @@ public class LevelUpPage : PopupBase
         SetDetails();
     }
 
+    private int tripleRewardAmount = 0;
+
     void SetDetails()
     {
         LevelText.text = "LEVEL " + GlobalVariables.GameLevel;
@@ -44,15 +46,17 @@ public class LevelUpPage : PopupBase
         LevelAmount.text = val.ToString();
         GlobalVariables.AddCoins(val);
         MultipliedAmountText.text = (val * 3).ToString();
+        tripleRewardAmount = val * 3;
     }
 
     public void TrippleReward()
     {
-
+        if (PluginManager.Instance) PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.LevelUpTripleReward);
     }
 
     public void TrippleRewardSuccess()
     {
+        GlobalVariables.AddCoins(tripleRewardAmount);
         TrippleRewardButton.interactable = false;
     }
 

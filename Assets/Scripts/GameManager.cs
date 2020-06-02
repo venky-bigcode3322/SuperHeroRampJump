@@ -36,7 +36,9 @@ public class GameManager : MonoBehaviour
     {
         InstantiateBike();
 
-        GlobalVariables.ResetScoreValues(); 
+        GlobalVariables.ResetScoreValues();
+
+        if (PluginManager.Instance) PluginManager.Instance.RequestRewardedVideoAd();
     }
 
     public void CheckFuelHud()

@@ -7,7 +7,7 @@ public class UiHandler : MonoBehaviour
 {
     public static UiHandler Instance;
 
-    [SerializeField] private PopupBase[] pages;
+    public PopupBase[] pages;
 
     private AllPages _previousPage;
     

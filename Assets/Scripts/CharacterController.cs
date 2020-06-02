@@ -83,6 +83,7 @@ public class CharacterController : MonoBehaviour
     void EnableVelocityCheck()
     {
         checkTheMovement = true;
+        if (PluginManager.Instance) PluginManager.Instance.RequestInterstitial();
     }
 
     private bool checkTheMovement = false;
@@ -109,11 +110,15 @@ public class CharacterController : MonoBehaviour
 
                 GlobalVariables.DistanceReward = distance;
 
+               
                 if (CameraManager.Instance) CameraManager.Instance.ActivateTurnCamera();
 
                 if (GameManager.instance) StartCoroutine(GameManager.instance.LevelComplete());
 
                 Debug.LogError("Sorry, He Is No More RIP -_-");
+
+
+
                 IsDead = true;
                 AirTimeDetector.isDead = IsDead;
             }

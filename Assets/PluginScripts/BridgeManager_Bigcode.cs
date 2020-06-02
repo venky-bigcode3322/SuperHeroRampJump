@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class BridgeManager_Bigcode : MonoBehaviour {
 
@@ -263,8 +264,6 @@ public class BridgeManager_Bigcode : MonoBehaviour {
                     //Debug.Log("Current date:::::" + PluginManager.Instance.CurrentDateTime.Day);
                     //Debug.Log("Condition:::" + ((DateTime)JsonUtility.FromJson<GameData.JsonDateTime>(GameDataHandler.Instance.GameData.SubScriptionExpiryDate)).CompareTo(PluginManager.Instance.CurrentDateTime));
 
-
-
                     if (((DateTime)JsonUtility.FromJson<GameData.JsonDateTime>(GameDataHandler.Instance.GameData.SubScriptionExpiryDate)).CompareTo(PluginManager.Instance.CurrentDateTime) > 0)
                     {
                         if (((DateTime)JsonUtility.FromJson<GameData.JsonDateTime>(GameDataHandler.Instance.GameData.lastBenfitGivenDate)).Day != PluginManager.Instance.CurrentDateTime.Day)
@@ -457,20 +456,21 @@ public class BridgeManager_Bigcode : MonoBehaviour {
     private CallMethod callMethod;
     public void MainThreadOnRewardedFinished()
     {
-
         if (Time.timeScale == 0)
             Time.timeScale = 1;
 
-
         PluginManager.Instance.RequestRewardedVideoAd();
-
-
 
         switch (PluginManager.Instance.RewardPlacement)
         {
-            case RewardType_BigCode.Coins:
-
-
+            case RewardType_BigCode.TrippleReward:
+                if (UiHandler.Instance) UiHandler.Instance.pages[(int)AllPages.FinishPage].GetComponent<FinishPage>().TrippleRewardSuccess();
+                break;
+            case RewardType_BigCode.LevelUpTripleReward:
+                if (UiHandler.Instance) UiHandler.Instance.pages[(int)AllPages.LevelUpPage].GetComponent<LevelUpPage>().TrippleRewardSuccess();
+                break;
+            case RewardType_BigCode.Get50Diamonds:
+                GlobalVariables.AddDiamonds(50);
                 break;
         }
 
@@ -572,9 +572,9 @@ public class BridgeManager_Bigcode : MonoBehaviour {
 
 public enum RewardType_BigCode
 {
-    Revive,
-    DoubleReward,
-    Coins,
+    LevelUpTripleReward,
+    TrippleReward,
+    Get50Diamonds,
     Unlock,
     WatchToResume,
     CoinsInGame

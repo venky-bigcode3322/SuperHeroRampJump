@@ -237,7 +237,7 @@ public class MenuAdHandler_BigCode : MonoBehaviour {
 
     public void ShowRewardedVideo()
     {
-        PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.Revive);
+        PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.LevelUpTripleReward);
 
 
     }

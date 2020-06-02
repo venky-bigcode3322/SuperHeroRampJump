@@ -204,7 +204,7 @@ public class BikeSelectionPage : PopupBase
 
     public void WatchVideoToGet50Diamonds()
     {
-
+        if (PluginManager.Instance) PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.Get50Diamonds);
     }
 
     public void PurchaseDiamonds()

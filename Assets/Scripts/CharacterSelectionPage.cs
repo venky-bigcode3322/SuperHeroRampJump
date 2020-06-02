@@ -89,6 +89,11 @@ public class CharacterSelectionPage : PopupBase
         if (UiHandler.Instance) UiHandler.Instance.CheckAndClosePopup();
     }
 
+    public void WatchAndGet50Diamonds()
+    {
+        if (PluginManager.Instance) PluginManager.Instance.ShowRewardedVideoAd(RewardType_BigCode.Get50Diamonds);
+    }
+
     void UpdateCoins(int coins)
     {
         CoinsText.text = coins.ToString();
