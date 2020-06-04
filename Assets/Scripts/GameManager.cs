@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void SetFuelforGame(float Value)
     {
         GlobalVariables.FuelPercentage = Value;
+        Debug.Log("Fuel :: " + Value);
         _initialBarPercentage = GlobalVariables.FuelPercentage;
     }
 

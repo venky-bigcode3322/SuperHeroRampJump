@@ -93,7 +93,7 @@ public class MenuPage : PopupBase
         {
             GlobalVariables.DeductCoins(GlobalVariables.UpgradeLevelPrice);
             GlobalVariables.UpgradeLevel += 1;
-            GlobalVariables.UpgradeLevelPrice += 1000;
+            GlobalVariables.UpgradeLevelPrice += 50;
             CheckFuelUpgradeHud();
         }
     }

@@ -6,15 +6,16 @@ public class KeyObject : MonoBehaviour
 {
     private bool isTriggered = false;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         if (!isTriggered)
         {
-            if (collision.transform.CompareTag("Bike") || collision.transform.root.CompareTag("Player"))
+            if (other.transform.root.CompareTag("Bike") || other.transform.root.CompareTag("Player"))
             {
                 isTriggered = true;
                 GlobalVariables.CollectedKeys += 1;
                 Debug.LogError("Key Collected!");
+                gameObject.SetActive(false);
             }
         }
     }

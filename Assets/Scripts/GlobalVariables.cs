@@ -63,7 +63,7 @@ public class GlobalVariables : MonoBehaviour
 
     public static int unlockedCharacters
     {
-        get => PlayerPrefs.GetInt("unlockedCharacters", 2);
+        get => PlayerPrefs.GetInt("unlockedCharacters", 1);
         set => PlayerPrefs.SetInt("unlockedCharacters", value);
     }
 
@@ -111,7 +111,7 @@ public class GlobalVariables : MonoBehaviour
 
     public static int UpgradeLevelPrice
     {
-        get => PlayerPrefs.GetInt("UpgradeLevelPrice", 1000);
+        get => PlayerPrefs.GetInt("UpgradeLevelPrice", 500);
         set => PlayerPrefs.SetInt("UpgradeLevelPrice", value);
     }
 
