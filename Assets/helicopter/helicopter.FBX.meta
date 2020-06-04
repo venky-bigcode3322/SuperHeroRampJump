@@ -3,7 +3,37 @@ guid: ef359f60cd305f34fbb74ee5626c7462
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Standardmaterial_1
+    second: {fileID: 2100000, guid: 21349a46755afec45a35de7f13e02160, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nhelglass
+    second: {fileID: 2100000, guid: 451c5cc62311cf541b9b0d5b4ad99f4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nhelhull1
+    second: {fileID: 2100000, guid: c516bcbfba3f5c949aa2921a9d6a264d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nhelhull2
+    second: {fileID: 2100000, guid: b6ce74e5b25a68043afe58a354dad97c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nhelsilver
+    second: {fileID: 2100000, guid: 94d566f6920ebd94ca7f0b3731d463b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nhelwhite
+    second: {fileID: 2100000, guid: eb223af26c38a9242b40bcc7e336a03b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -31,11 +61,11 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

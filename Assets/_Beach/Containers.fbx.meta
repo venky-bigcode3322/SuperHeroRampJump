@@ -3,7 +3,22 @@ guid: 020e2741dd0199d42ab906cc2e6f73c3
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete_floor_11
+    second: {fileID: 2100000, guid: 437581f493912004c84bc9b3663c0340, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Container_1
+    second: {fileID: 2100000, guid: 73b33730bad77b144bebd0995f3ac279, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Container_gate
+    second: {fileID: 2100000, guid: 8a0a0ce72e012994d976bc6aaae87816, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -31,11 +46,11 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

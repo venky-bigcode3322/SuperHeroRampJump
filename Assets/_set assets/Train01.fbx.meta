@@ -3,7 +3,12 @@ guid: 737a4d8b3d993bb45920bab2194eb8de
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Train_01_Diff2
+    second: {fileID: 2100000, guid: 613548c6b5967fe4290fbf94d9b9a9ad, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -31,11 +36,11 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

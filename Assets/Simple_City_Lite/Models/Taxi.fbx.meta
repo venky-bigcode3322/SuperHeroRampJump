@@ -1,37 +1,95 @@
 fileFormatVersion: 2
 guid: ff73d1785787b714caa1fc1c8d9cbcfc
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Taxi
-    100004: Wheel_FL
-    100006: Wheel_FR
-    100008: Wheel_RL
-    100010: Wheel_RR
-    400000: //RootNode
-    400002: Taxi
-    400004: Wheel_FL
-    400006: Wheel_FR
-    400008: Wheel_RL
-    400010: Wheel_RR
-    2100000: wheel M
-    2100002: Taxi M
-    2300000: Taxi
-    2300002: Wheel_FL
-    2300004: Wheel_FR
-    2300006: Wheel_RL
-    2300008: Wheel_RR
-    3300000: Taxi
-    3300002: Wheel_FL
-    3300004: Wheel_FR
-    3300006: Wheel_RL
-    3300008: Wheel_RR
-    4300000: Wheel_RR
-    4300002: Wheel_FR
-    4300004: Wheel_RL
-    4300006: Wheel_FL
-    4300008: Taxi
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Taxi
+  - first:
+      1: 100004
+    second: Wheel_FL
+  - first:
+      1: 100006
+    second: Wheel_FR
+  - first:
+      1: 100008
+    second: Wheel_RL
+  - first:
+      1: 100010
+    second: Wheel_RR
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Taxi
+  - first:
+      4: 400004
+    second: Wheel_FL
+  - first:
+      4: 400006
+    second: Wheel_FR
+  - first:
+      4: 400008
+    second: Wheel_RL
+  - first:
+      4: 400010
+    second: Wheel_RR
+  - first:
+      21: 2100000
+    second: wheel M
+  - first:
+      21: 2100002
+    second: Taxi M
+  - first:
+      23: 2300000
+    second: Taxi
+  - first:
+      23: 2300002
+    second: Wheel_FL
+  - first:
+      23: 2300004
+    second: Wheel_FR
+  - first:
+      23: 2300006
+    second: Wheel_RL
+  - first:
+      23: 2300008
+    second: Wheel_RR
+  - first:
+      33: 3300000
+    second: Taxi
+  - first:
+      33: 3300002
+    second: Wheel_FL
+  - first:
+      33: 3300004
+    second: Wheel_FR
+  - first:
+      33: 3300006
+    second: Wheel_RL
+  - first:
+      33: 3300008
+    second: Wheel_RR
+  - first:
+      43: 4300000
+    second: Wheel_RR
+  - first:
+      43: 4300002
+    second: Wheel_FR
+  - first:
+      43: 4300004
+    second: Wheel_RL
+  - first:
+      43: 4300006
+    second: Wheel_FL
+  - first:
+      43: 4300008
+    second: Taxi
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -64,9 +122,10 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -74,18 +133,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -94,10 +154,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -107,6 +168,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
