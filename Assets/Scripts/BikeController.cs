@@ -48,16 +48,20 @@ public class BikeController : MonoBehaviour
 
     [SerializeField] private Collider _dummyCollider;
 
+    [SerializeField] GameObject[] BoosterParticles;
+
     private void Awake()
     {
         instance = this;
-        Debug.Log("Instance:: " + instance);
 
         _wheelRadius = frontWheel.GetComponent<CircleCollider2D>().radius;
 
         _body = this.GetComponent<Rigidbody2D>();
 
         _boydCollider2D = GetComponent<BoxCollider2D>();
+
+        for (int i = 0; i < BoosterParticles.Length; i++)
+            BoosterParticles[i].SetActive(false);
     }
 
     private void OnDestroy()
@@ -106,11 +110,17 @@ public class BikeController : MonoBehaviour
                 GameManager.instance.CheckFuelHud();
                 CameraManager.Instance.lerpDistance = 18;
 
+                for (int i = 0; i < BoosterParticles.Length; i++)
+                    BoosterParticles[i].SetActive(true);
+
                 if (!_isCharacterReleased && GlobalVariables.FuelPercentage <= 0)
                 {
                     _isCharacterReleased = true;
                     ReleaseCharacter();
                     CameraManager.Instance.lerpDistance = 15f;
+
+                    for (int i = 0; i < BoosterParticles.Length; i++)
+                        BoosterParticles[i].SetActive(false);
                 }
             }
 
@@ -118,6 +128,8 @@ public class BikeController : MonoBehaviour
             {
                 CameraManager.Instance.lerpDistance = 15f;
                 _applyforce = false;
+                for (int i = 0; i < BoosterParticles.Length; i++)
+                    BoosterParticles[i].SetActive(false);
             }
 
             if (_boydCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")) && !_isCharacterReleased)
