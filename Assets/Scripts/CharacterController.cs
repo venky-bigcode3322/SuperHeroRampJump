@@ -129,10 +129,14 @@ public class CharacterController : MonoBehaviour
 
     private Vector3 _currentPosition;
     private static readonly int DriverPose = Animator.StringToHash("DriverPose");
+    private static readonly int DriverIdleIndex = Animator.StringToHash("DriverIdleIndex");
     private static readonly int Flying = Animator.StringToHash("Flying");
 
     private void FixedUpdate()
     {
+        if (BikeController.instance == null)
+            return;
+
         //if (applyforce)
         //{
         //    foreach (var item in AllBodyRigidbody)
@@ -192,5 +196,11 @@ public class CharacterController : MonoBehaviour
     public void SetDriverPose(int index)
     {
         animator.SetInteger(DriverPose, index);
+    }
+
+    public void SetDriverIdlePose(int index)
+    {
+        Debug.LogError("Idle Pose :: " + index);
+        animator.SetInteger(DriverIdleIndex, index);
     }
 }

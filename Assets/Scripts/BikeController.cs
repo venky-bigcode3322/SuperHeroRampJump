@@ -51,6 +51,7 @@ public class BikeController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Debug.Log("Instance:: " + instance);
 
         _wheelRadius = frontWheel.GetComponent<CircleCollider2D>().radius;
 
@@ -61,7 +62,7 @@ public class BikeController : MonoBehaviour
 
     private void OnDestroy()
     {
-        instance = null;
+      //  instance = null;
     }
 
     private void Start()
@@ -71,11 +72,14 @@ public class BikeController : MonoBehaviour
 
     public void ActivateSuperHeroCharacter()
     {
+        if(instance == null)
+            instance = this;
+
         if (characterController != null)
             Destroy(characterController.gameObject);
 
         characterController = GameManager.instance.InstantiateSuperHero(characterPose);
-        characterController.SetDriverPose(driverPoseIndex);
+        characterController.SetDriverIdlePose(driverPoseIndex);
         currentBikeState = BikeControlStates.None;
     }
 
@@ -87,7 +91,9 @@ public class BikeController : MonoBehaviour
         {
             if(currentBikeState == BikeControlStates.InitState)
             {
+                characterController.SetDriverPose(driverPoseIndex);
                 currentBikeState = BikeControlStates.StartMovingState;
+                //characterController.SetDriverPose(driverPoseIndex);
             }
         }
 
@@ -98,16 +104,19 @@ public class BikeController : MonoBehaviour
                 _applyforce = true;
                 GlobalVariables.FuelPercentage -= Time.deltaTime * 20;
                 GameManager.instance.CheckFuelHud();
+                CameraManager.Instance.lerpDistance = 18;
 
                 if (!_isCharacterReleased && GlobalVariables.FuelPercentage <= 0)
                 {
                     _isCharacterReleased = true;
                     ReleaseCharacter();
+                    CameraManager.Instance.lerpDistance = 15f;
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
+                CameraManager.Instance.lerpDistance = 15f;
                 _applyforce = false;
             }
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +18,8 @@ public class MenuPage : PopupBase
     private Vector3[] DefaultButtonPositions;
 
     [SerializeField] DailyBonusPage DailyBonusPage;
+
+    [SerializeField] OfflineEarningPage OfflineEarningPage;
 
     private void Awake()
     {
@@ -59,6 +61,12 @@ public class MenuPage : PopupBase
         StartCoroutine(AnimatePage(0));
 
         Invoke("CheckDailyBonus",2);
+
+        if (!GlobalVariables.OfflinePopupChecked)
+        {
+            GlobalVariables.OfflinePopupChecked = true;
+            Invoke("CheckOfflineEarnings", 1.5f);
+        }
     }
 
     void CheckDailyBonus()
@@ -77,6 +85,18 @@ public class MenuPage : PopupBase
         GlobalVariables.DiamondUpdateEvent -= UpdateDiamonds;
     }
 
+    void CheckOfflineEarnings()
+    {
+        if (GlobalVariables.LastPlayedTime != string.Empty)
+        {
+            DateTime currentTime = DateTime.Now;
+            TimeSpan ts = currentTime - Convert.ToDateTime(GlobalVariables.LastPlayedTime);
+            if (ts.TotalHours > 1)
+            {
+                OfflineEarningPage.Open();
+            }
+        }
+    }
 
     public void DiamondsButton()
     {

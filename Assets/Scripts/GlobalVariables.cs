@@ -24,6 +24,8 @@ public class GlobalVariables : MonoBehaviour
 
     public static event DiamondsUpdate DiamondUpdateEvent;
 
+    public static bool OfflinePopupChecked = false;
+
     private static string[] BikeKeys = new string[] { "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "b11", "b12" };
     private static string[] BikeTimerKeys = new string[] { "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12" };
 
@@ -143,6 +145,12 @@ public class GlobalVariables : MonoBehaviour
     {
         get => PlayerPrefs.GetInt("OfflineEarningsLevelPrice", 1000);
         set =>  PlayerPrefs.SetInt("OfflineEarningsLevelPrice", value);
+    }
+
+    public static string LastPlayedTime
+    {
+        get => PlayerPrefs.GetString("LastPlayedTime", string.Empty);
+        set => PlayerPrefs.SetString("LastPlayedTime", value);
     }
 
     public static void AddCoins(int amount)

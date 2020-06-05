@@ -405,7 +405,7 @@ MonoBehaviour:
   characterPose: {fileID: 6258351347201836692}
   characterController: {fileID: 0}
   driverPoseIndex: 3
-  _dummyCollider: {fileID: 0}
+  _dummyCollider: {fileID: 2368320395012143541}
   dirOffset: {x: 0.92, y: 0}
 --- !u!61 &919761195954349415
 BoxCollider2D:

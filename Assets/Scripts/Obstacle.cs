@@ -40,7 +40,9 @@ public class Obstacle : ObstacleBase
             if (collision.transform.CompareTag("Bike") || collision.transform.root.CompareTag("Player"))
             {
                 isTriggered = true;
-                Debug.Log("Colliding:: + "+ collision.collider.name);
+                //Debug.Log("Colliding:: + "+ collision.collider.name);
+                GlobalVariables.BonusReward += 100;
+                if (ScoreManager.Instance) ScoreManager.Instance.AddToQueue(_obstaclesTypes + "\n 100");
             }
         }
     }
