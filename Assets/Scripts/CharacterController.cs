@@ -23,11 +23,13 @@ public class CharacterController : MonoBehaviour
 
     private AirTimeDetector AirTimeDetector;
 
+    private Transform DistanceBar;
+
+    private TextMesh DistanceBarText;
+
 
     private void Awake()
     {
-
-
         foreach (var item in GetComponentsInChildren<Rigidbody>())
         {
             AllBodyRigidbody.Add(item);
@@ -51,12 +53,17 @@ public class CharacterController : MonoBehaviour
         StartPoint = GameObject.Find("StartPoint").transform;
 
         AirTimeDetector = GetComponentInChildren<AirTimeDetector>();
+
+        DistanceBar = GameManager.instance.DistanceBar;
+        DistanceBarText = DistanceBar.GetComponentInChildren<TextMesh>();
     }
 
     private void Start() 
     {
         if (IngamePage.Instance) DistanceText = IngamePage.Instance.DistanceText;
     }
+
+    private bool MoveDistanceBar = false;
 
     public void ReleaseCharacter(float val)
     {
@@ -77,7 +84,13 @@ public class CharacterController : MonoBehaviour
         {
             item.AddForce(Vector3.right * (item.mass * val), ForceMode.Impulse);
         }
+
+        if (SoundManager.Instance) SoundManager.Instance.PlayScreamingSounds();
+
         Invoke("EnableVelocityCheck", 2);
+
+        MoveDistanceBar = true;
+
     }
 
     void EnableVelocityCheck()
@@ -89,6 +102,8 @@ public class CharacterController : MonoBehaviour
     private bool checkTheMovement = false;
 
     public bool IsDead = false;
+
+    private Vector3 distanceBarPositon;
 
     private void Update()
     {
@@ -123,6 +138,22 @@ public class CharacterController : MonoBehaviour
                 AirTimeDetector.isDead = IsDead;
             }
         }
+
+
+        if (_CalculateDistance && Time.frameCount % 2 == 0)
+        {
+            var distance = Mathf.RoundToInt(CalculateDistance);
+            DistanceText.text = distance + "m";
+            DistanceBarText.text = distance + " m";
+        }
+
+        if (MoveDistanceBar)
+        {
+            distanceBarPositon = DistanceBar.transform.position;
+            distanceBarPositon.x = Hips.transform.position.x;
+            DistanceBar.transform.position = distanceBarPositon;
+        }
+
     }
 
     private float Airtimer = 0;
@@ -165,10 +196,7 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        if (_CalculateDistance && Time.frameCount % 2 == 0)
-        {
-            DistanceText.text = Mathf.RoundToInt(CalculateDistance) + "m";
-        }
+       
     }
 
     public float CalculateDistance

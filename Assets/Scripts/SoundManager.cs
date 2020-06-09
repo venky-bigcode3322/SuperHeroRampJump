@@ -10,11 +10,22 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource BG_AudioSource;
     [SerializeField] AudioSource ButtonSource;
 
+    [SerializeField] AudioSource ScreamingAudioSource;
+    [SerializeField] AudioSource PainAudioSource;
+
+    [SerializeField] AudioSource CollectableAudioSource;
+
     [Tooltip("0 = Menu, 1 = GamePlay")]
     [SerializeField] AudioClip[] BGSoundClips;
 
+    [SerializeField] AudioClip[] ScreamingSoundClips;
+    [SerializeField] AudioClip[] PainSoundClips;
+
+    [SerializeField] AudioClip KeyCollectionSound;
+
     [SerializeField] AudioMixerGroup MusicGroup;
     [SerializeField] AudioMixerGroup SoundGroup;
+
 
     private void Awake()
     {
@@ -76,6 +87,33 @@ public class SoundManager : MonoBehaviour
         if (ButtonSource && ButtonSource.clip) ButtonSource.Play();
     }
 
+    public void PlayScreamingSounds()
+    {
+        if (ScreamingAudioSource && ScreamingSoundClips.Length > 0)
+        {
+            ScreamingAudioSource.clip = ScreamingSoundClips[Random.Range(0, ScreamingSoundClips.Length)];
+            ScreamingAudioSource.Play();
+        }
+    }
+
+    public void PlayPainSounds()
+    {
+        if (PainAudioSource && PainSoundClips.Length > 0 && !PainAudioSource.isPlaying)
+        {
+            PainAudioSource.clip = PainSoundClips[Random.Range(0, PainSoundClips.Length)];
+            PainAudioSource.Play();
+        }
+    }
+
+    public void PlayKeyCollectionSound()
+    {
+        if(CollectableAudioSource && !CollectableAudioSource.isPlaying)
+        {
+            CollectableAudioSource.clip = KeyCollectionSound;
+            CollectableAudioSource.Play();
+        }
+    }
+
     public void CheckMusicAndSoundStatus()
     {
         float soundVolume = 0;
@@ -98,7 +136,6 @@ public class SoundManager : MonoBehaviour
     void MusicVolume(float value)
     {
         MusicGroup.audioMixer.SetFloat("MusicVolume", value);
-
     }
 
     void SoundVolume(float value)

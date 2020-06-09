@@ -17,6 +17,9 @@ public class ScoreManager : MonoBehaviour
 
     private bool isAnimationPlaying = false;
 
+    [SerializeField] Image[] KeyImages;
+    [SerializeField] Sprite[] Keys;
+
     private void Awake()
     {
         Instance = this;
@@ -59,5 +62,21 @@ public class ScoreManager : MonoBehaviour
     void CanvasGroupAnim(float value)
     {
         CG.alpha = value;
+    }
+
+    private void OnEnable()
+    {
+        CheckKeys();
+    }
+
+    public void CheckKeys()
+    {
+        for (int i = 0; i < KeyImages.Length; i++)
+        {
+            if (i < GlobalVariables.CollectedKeys)
+                KeyImages[i].sprite = Keys[1];
+            else
+                KeyImages[i].sprite = Keys[0];
+        }
     }
 }

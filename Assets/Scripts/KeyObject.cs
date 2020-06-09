@@ -14,6 +14,7 @@ public class KeyObject : MonoBehaviour
             {
                 isTriggered = true;
                 GlobalVariables.CollectedKeys += 1;
+                if (SoundManager.Instance) SoundManager.Instance.PlayKeyCollectionSound();
                 Debug.LogError("Key Collected!");
                 gameObject.SetActive(false);
             }

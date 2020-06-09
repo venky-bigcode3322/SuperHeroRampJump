@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentBike;
 
+    public Transform DistanceBar;
+
+    [SerializeField] GameObject PaperParticle;
+    [SerializeField] GameObject CoinsParticle;
+
     private void Awake()
     {
         instance = this;
@@ -82,6 +87,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator LevelComplete()
     {
+        PaperParticle.SetActive(true);
+        CoinsParticle.SetActive(true);
         yield return new WaitForSeconds(3f);
 
         if (GlobalVariables.CurrentJumpingDistance >= (GlobalVariables.GameLevel * 1000))

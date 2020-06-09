@@ -50,6 +50,16 @@ public class BikeController : MonoBehaviour
 
     [SerializeField] GameObject[] BoosterParticles;
 
+    [SerializeField] AudioSource BikeAudioSource;
+
+    [SerializeField] AudioSource BoosterAudioSource;
+
+    [SerializeField] AudioClip AccerlationClip;
+    [SerializeField] AudioClip EngineClip;
+    [SerializeField] AudioClip RacingClip;
+
+    [SerializeField] GameObject SpeedRays;
+
     private void Awake()
     {
         instance = this;
@@ -62,6 +72,10 @@ public class BikeController : MonoBehaviour
 
         for (int i = 0; i < BoosterParticles.Length; i++)
             BoosterParticles[i].SetActive(false);
+
+        BikeAudioSource.clip = EngineClip;
+        BikeAudioSource.Play();
+        BikeAudioSource.loop = true;
     }
 
     private void OnDestroy()
@@ -89,6 +103,13 @@ public class BikeController : MonoBehaviour
 
     private bool _isCharacterReleased = false;
 
+    void PlayRaceSound()
+    {
+        BikeAudioSource.clip = RacingClip;
+        BikeAudioSource.loop = true;
+        BikeAudioSource.Play();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && currentBikeState != BikeControlStates.None)
@@ -98,6 +119,10 @@ public class BikeController : MonoBehaviour
                 characterController.SetDriverPose(driverPoseIndex);
                 currentBikeState = BikeControlStates.StartMovingState;
                 //characterController.SetDriverPose(driverPoseIndex);
+                BikeAudioSource.clip = AccerlationClip;
+                BikeAudioSource.loop = false;
+                BikeAudioSource.Play();
+                Invoke("PlayRaceSound", AccerlationClip.length);
             }
         }
 
@@ -108,7 +133,10 @@ public class BikeController : MonoBehaviour
                 _applyforce = true;
                 GlobalVariables.FuelPercentage -= Time.deltaTime * 20;
                 GameManager.instance.CheckFuelHud();
-                CameraManager.Instance.lerpDistance = 18;
+                CameraManager.Instance.lerpDistance = 15;
+
+                if (!BoosterAudioSource.isPlaying)
+                    BoosterAudioSource.Play();
 
                 for (int i = 0; i < BoosterParticles.Length; i++)
                     BoosterParticles[i].SetActive(true);
@@ -117,7 +145,10 @@ public class BikeController : MonoBehaviour
                 {
                     _isCharacterReleased = true;
                     ReleaseCharacter();
-                    CameraManager.Instance.lerpDistance = 15f;
+                    BikeAudioSource.Stop();
+                    BoosterAudioSource.Stop();
+
+                    CameraManager.Instance.lerpDistance = 10f;
 
                     for (int i = 0; i < BoosterParticles.Length; i++)
                         BoosterParticles[i].SetActive(false);
@@ -126,10 +157,12 @@ public class BikeController : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                CameraManager.Instance.lerpDistance = 15f;
+                CameraManager.Instance.lerpDistance = 10f;
                 _applyforce = false;
                 for (int i = 0; i < BoosterParticles.Length; i++)
                     BoosterParticles[i].SetActive(false);
+
+                BoosterAudioSource.Pause();
             }
 
             if (_boydCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")) && !_isCharacterReleased)
@@ -205,6 +238,12 @@ public class BikeController : MonoBehaviour
                 if (_timer > 10) { _valuesync = 0; _timer = 0; }
             }
         }
+
+
+        if (_body.velocity.magnitude > 30)
+            SpeedRays.SetActive(true);
+        else
+            SpeedRays.SetActive(false);
     }
 
     private int _valuesync = 0;
