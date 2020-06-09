@@ -2655,7 +2655,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad7469ff3460e904281f3fc99ada8bc1, type: 2}
+  - {fileID: 2100000, guid: 730aca94659410c4ea5de7d594590124, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3791,6 +3791,7 @@ MonoBehaviour:
   - {fileID: 1152469547}
   - {fileID: 1901622011}
   DailyBonusPage: {fileID: 353121299}
+  OfflineEarningPage: {fileID: 0}
   BonusText: {fileID: 1324721943}
   BonusLevelText: {fileID: 1393750868}
 --- !u!114 &182727521
